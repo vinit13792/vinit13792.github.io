@@ -1,2 +1,2 @@
-# vinit13792.github.io-
+# vinit13792.github.io
 Professional Resume
