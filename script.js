@@ -17,7 +17,17 @@ const projects = [
   tags: ["OpenCV", "PyTorch", "Mask-RCNN"], // [cite: 11]
   impact: "Increased accuracy to 94%", // [cite: 16]
   description: "Developed a detection pipeline to count and calculate growth rate of micro-organisms." // [cite: 15]
-}
+},
+{
+    id: 3,
+    index: "03",
+    title: "Unsloth: Kernel Anatomy",
+    company: "Technical Blog",
+    category: "GenAI", // This links it to the 'GenAI' filter button
+    tags: ["Triton", "LLMs", "Optimization"],
+    link: "unsloth-kernels.html", // Ensure this matches your file name exactly
+    description: "A deep dive into how custom Triton kernels bypass the VRAM wall for faster LLM training."
+  }
 ];
 
 function renderProjects(filteredProjects) {
