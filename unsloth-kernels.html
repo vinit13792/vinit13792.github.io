@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bypassing the VRAM Wall: An Anatomy of Unsloth's Kernels | Vinit Sutar</title>
+    <title>Why should you use Unsloth? | Vinit Sutar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -21,8 +21,8 @@
 <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased">
 
     <header class="max-w-4xl mx-auto pt-24 pb-16 px-6">
-        <h1 class="text-5xl md:text-6xl font-black tracking-tighter mb-6 uppercase">Bypassing the VRAM Wall</h1>
-        <p class="text-2xl text-slate-500 font-medium mb-8">An Anatomy of Unsloth's Triton Kernels</p>
+        <h1 class="text-5xl md:text-6xl font-black tracking-tighter mb-6 uppercase">Why should you use Unsloth?</h1>
+        <p class="text-2xl text-slate-500 font-medium mb-8">An exploration of the benefits and performance improvements offered by Unsloth's optimized kernels.</p>
         <blockquote class="border-l-4 border-blue-500 pl-6 py-2 text-xl italic text-slate-400">
             "Architecture is about the trade-offs we choose, not just the tools we use."
         </blockquote>
@@ -31,7 +31,7 @@
     <main class="max-w-4xl mx-auto px-6">
         
         <section class="mb-24 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
-            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-8 uppercase">The Kitchen Analogy: Why Your GPU is Slow</h2>
+            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-8 uppercase">The Kitchen Analogy: Why Your GPU is Slow?</h2>
             <p class="mb-6">
                 Imagine you are a world-class chef (the <strong>GPU</strong>). You are incredibly fast at chopping vegetables. However, your ingredients are stored in a massive cold storage warehouse (<strong>VRAM</strong>) across the street.
             </p>
@@ -306,6 +306,54 @@
             </div>
         </section>
 
+        <section class="max-w-4xl mx-auto py-24 px-6 border-t border-slate-100 dark:border-slate-800">
+            <div class="grid md:grid-cols-2 gap-16">
+                
+                <div class="space-y-12">
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-blue-500 mb-4">What it is</h4>
+                        <p class="text-xl leading-relaxed opacity-80">
+                            <strong>Open Source Fine-tuning & RL framework for LLMs.</strong> A lightweight, ultra-fast library that rewrites the core "engines" (kernels) of LLM fine-tuning from scratch using <strong>OpenAI Triton</strong>.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-emerald-500 mb-4">Why it matters</h4>
+                        <p class="text-xl leading-relaxed opacity-80">
+                            It shatters the <strong>Memory Wall</strong>. It allows engineers to train models 2x faster and use 70% less memory, making professional-grade AI accessible on consumer hardware.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-purple-500 mb-4">How it works</h4>
+                        <p class="text-xl leading-relaxed opacity-80">
+                            Through <strong>Kernel Fusion</strong>. It combines multiple math steps into one, keeping data in the GPU's fastest memory (SRAM) and avoiding slow round-trips to the "warehouse" (VRAM).
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-amber-500 mb-4">When to use it</h4>
+                        <p class="text-xl leading-relaxed opacity-80">
+                            Ideal for <strong>Single-GPU fine-tuning</strong> (LoRA/QLoRA) of Llama, Mistral, or Gemma models when you need to maximize speed and batch size on limited VRAM.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 p-8 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+                <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-red-500 mb-6 text-center">When NOT to use it</h4>
+                <div class="grid md:grid-cols-2 gap-8 text-sm opacity-70">
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>If you require complex <strong>Multi-GPU Parallelism</strong> (DeepSpeed/FSDP) that Unsloth doesn't yet fully support.</li>
+                        <li>If you are working with extremely niche architectures that don't have custom kernels written for them yet.</li>
+                    </ul>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>When "developer simplicity" is more important than hardware efficiency (standard PyTorch is easier to debug).</li>
+                        <li>If your project requires strict adherence to vanilla Hugging Face implementations for legal or compliance reasons.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
         <footer class="max-w-4xl mx-auto py-24 px-6 border-t border-slate-100 dark:border-slate-800 text-center">
             <h2 class="text-4xl font-black tracking-tighter mb-8 uppercase">Conclusion</h2>
