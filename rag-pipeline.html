@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Enterprise RAG Pipeline with Tool Calling | Vinit Sutar</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        ::selection { background-color: white; color: black; }
+        ::-moz-selection { background-color: white; color: black; }
+        pre { background: #1e293b; border-radius: 12px; padding: 24px; overflow-x: auto; }
+        code { font-family: 'Fira Code', 'JetBrains Mono', monospace; font-size: 14px; }
+        .keyword { color: #c084fc; }
+        .string { color: #4ade80; }
+        .comment { color: #64748b; }
+        .function { color: #60a5fa; }
+    </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-50 antialiased">
+
+    <nav class="max-w-4xl mx-auto py-8 px-6 flex justify-between items-center">
+        <a href="index.html" class="font-black uppercase tracking-tighter text-2xl">VS</a>
+        <a href="index.html" class="text-sm font-bold uppercase tracking-widest opacity-60 hover:opacity-100">← Back to Gallery</a>
+    </nav>
+
+    <header class="max-w-4xl mx-auto pt-20 pb-16 px-6">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 mb-4">Case Study 04</p>
+        <h1 class="text-5xl md:text-6xl font-black tracking-tighter mb-8 uppercase">Enterprise RAG Pipeline with Tool Calling</h1>
+        <div class="flex flex-wrap gap-4 mb-8">
+            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">Azure Databricks</span>
+            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">RAG</span>
+            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">HNSW Indexing</span>
+            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">Gemma 3</span>
+            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">LangChain</span>
+        </div>
+        <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-3xl">
+            Building a production-grade Retrieval-Augmented Generation pipeline that handles 10,000+ daily queries with sub-second latency, enabling intelligent document retrieval and structured tool calling for a leading NBFC.
+        </p>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-12 px-6 border-t border-slate-100 dark:border-slate-800">
+
+    <!-- The Problem -->
+    <section class="grid md:grid-cols-4 gap-12 mb-32">
+        <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">The Problem</h2>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Why We Built This</h3>
+        </div>
+        <div class="md:col-span-3 space-y-10 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+            <p>
+                Shriram Finance, one of India's largest NBFCs, manages an enormous repository of loan policies, compliance documents, product specifications, and procedural guidelines. Loan officers and customer service representatives spent <strong>2-4 hours daily</strong> searching through PDFs, SharePoint folders, and legacy systems to answer customer queries accurately.
+            </p>
+
+            <div class="bg-red-50 dark:bg-red-950/30 border-l-4 border-red-500 p-6 rounded-r-lg">
+                <h4 class="font-black text-red-700 dark:text-red-400 uppercase mb-3">Pain Points</h4>
+                <ul class="space-y-3 text-lg">
+                    <li><strong>Information Silos:</strong> Critical policy documents scattered across 15+ different systems with no unified search</li>
+                    <li><strong>Response Latency:</strong> Average query resolution time of 45 minutes, leading to customer churn</li>
+                    <li><strong>Accuracy Issues:</strong> 23% of customer responses contained outdated or incorrect information</li>
+                    <li><strong>Training Overhead:</strong> New employees took 3+ months to become proficient in document navigation</li>
+                    <li><strong>Compliance Risk:</strong> No audit trail of what information was provided to customers</li>
+                </ul>
+            </div>
+
+            <p>
+                The leadership team needed a solution that could provide <strong>instantaneous, accurate answers</strong> grounded in official documents, with the flexibility to query structured data (loan balances, payment schedules) alongside unstructured content.
+            </p>
+        </div>
+    </section>
+
+    <!-- The Solution Architecture -->
+    <section class="grid md:grid-cols-4 gap-12 mb-32">
+        <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Architecture</h2>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">The Solution Design</h3>
+        </div>
+        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+            <p>
+                We architected a <strong>hybrid RAG system</strong> combining dense vector retrieval with structured tool calling capabilities. The key insight was that not all queries are equal—some require semantic understanding of policy documents, while others need precise database lookups.
+            </p>
+
+            <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl">
+                <h4 class="font-black text-slate-900 dark:text-white uppercase mb-6">System Components</h4>
+                <pre class="text-sm text-slate-300 overflow-x-auto"><code>┌─────────────────────────────────────────────────────────────────┐
+│                        USER QUERY                                │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    QUERY CLASSIFIER                              │
+│    Determines: RAG retrieval vs. Tool Call vs. Hybrid           │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │
+          ┌───────────────┼───────────────┐
+          ▼               ▼               ▼
+    ┌──────────┐    ┌──────────┐    ┌──────────┐
+    │   RAG    │    │   TOOL   │    │  HYBRID  │
+    │  ENGINE  │    │  CALLER  │    │  MODE    │
+    └────┬─────┘    └────┬─────┘    └───��┬─────┘
+         │               │               │
+         ▼               ▼               ▼
+    ┌──────────┐    ┌──────────┐    ┌──────────┐
+    │  Vector  │    │   SQL    │    │  Both    │
+    │   DB     │    │  API     │    │Combined  │
+    └────┬─────┘    └────┬─────┘    └────┬─────┘
+         │               │               │
+         └───────────────┼───────────────┘
+                         ▼
+              ┌──────────────────┐
+              │   LLM (Gemma 3)  │
+              │   Response Gen   │
+              └──────────────────┘</code></pre>
+            </div>
+
+            <h4 class="font-black text-slate-900 dark:text-white uppercase mt-12">Why Azure Databricks?</h4>
+            <p>
+                We chose Azure Databricks as our ML platform for three critical reasons:
+            </p>
+            <ul class="space-y-4 mt-6">
+                <li><strong>Unified Vector Store:</strong> Databricks Vector Search provides native HNSW indexing with automatic index management, eliminating the need for separate vector database infrastructure</li>
+                <li><strong>MLflow Integration:</strong> End-to-end experiment tracking, model versioning, and deployment pipelines in one ecosystem</li>
+                <li><strong>Enterprise Security:</strong> Native integration with Azure AD, row-level security, and compliance with RBI data localization requirements</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Technical Implementation -->
+    <section class="grid md:grid-cols-4 gap-12 mb-32">
+        <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Implementation</h2>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Technical Deep-Dive</h3>
+        </div>
+        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+
+            <h4 class="font-black text-slate-900 dark:text-white uppercase">1. Document Ingestion Pipeline</h4>
+            <p>
+                The ingestion pipeline processes 50,000+ documents daily using a multi-stage approach:
+            </p>
+            <pre class="text-sm text-slate-300 overflow-x-auto mt-6"><code><span class="keyword">from</span> databricks.sdk <span class="keyword">import</span> WorkspaceClient
+<span class="keyword">from</span> langchain.text_splitter <span class="keyword">import</span> RecursiveCharacterTextSplitter
+<span class="keyword">from</span> sentence_transformers <span class="keyword">import</span> SentenceTransformer
+
+<span class="keyword">class</span> <span class="function">DocumentIngestionPipeline</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self):
+        self.embedder = SentenceTransformer(<span class="string">'all-MiniLM-L6-v2'</span>)
+        self.splitter = RecursiveCharacterTextSplitter(
+            chunk_size=<span class="string">512</span>,
+            chunk_overlap=<span class="string">50</span>,
+            separators=[<span class="string">"\n\n"</span>, <span class="string">"\n"</span>, <span class="string">". "</span>, <span class="string">" "</span>]
+        )
+
+    <span class="keyword">def</span> <span class="function">process_document</span>(self, doc_path: str):
+        <span class="comment"># Extract text based on file type</span>
+        text = self.extract_text(doc_path)
+
+        <span class="comment"># Chunk with metadata preservation</span>
+        chunks = self.splitter.split_text(text)
+
+        <span class="comment"># Generate embeddings in batches</span>
+        embeddings = self.embedder.encode(chunks, batch_size=<span class="string">32</span>)
+
+        <span class="comment"># Upsert to Databricks Vector Search</span>
+        self.vector_store.upsert(
+            chunks=chunks,
+            embeddings=embeddings,
+            metadata={
+                <span class="string">'source'</span>: doc_path,
+                <span class="string">'timestamp'</span>: datetime.now(),
+                <span class="string">'department'</span>: self.classify_dept(doc_path)
+            }
+        )</code></pre>
+
+            <h4 class="font-black text-slate-900 dark:text-white uppercase mt-12">2. HNSW Index Configuration</h4>
+            <p>
+                Vector search performance was critical. We tuned HNSW parameters through extensive benchmarking:
+            </p>
+            <pre class="text-sm text-slate-300 overflow-x-auto mt-6"><code><span class="comment"># Vector Search Index Configuration</span>
+index_config = {
+    <span class="string">"name"</span>: <span class="string">"policy_documents_index"</span>,
+    <span class="string">"endpoint_name"</span>: <span class="string">"rag-endpoint"</span>,
+    <span class="string">"primary_key"</span>: <span class="string">"chunk_id"</span>,
+    <span class="string">"embedding_source_column"</span>: <span class="string">"embedding"</span>,
+    <span class="string">"embedding_dimension"</span>: <span class="string">384</span>,  <span class="comment"># MiniLM-L6-v2</span>
+    <span class="string">"algorithm"</span>: <span class="string">"HNSW"</span>,
+    <span class="string">"hnsw_config"</span>: {
+        <span class="string">"m"</span>: <span class="string">24</span>,              <span class="comment"># Connections per node</span>
+        <span class="string">"ef_construction"</span>: <span class="string">256</span>, <span class="comment"># Build-time search depth</span>
+        <span class="string">"ef_search"</span>: <span class="string">128</span>,     <span class="comment"># Query-time search depth</span>
+        <span class="string">"metric"</span>: <span class="string">"cosine"</span>
+    }
+}
+
+<span class="comment"># Benchmarking results (queries/sec at different ef values)</span>
+<span class="comment"># ef=64:  850 qps, recall@10 = 0.87</span>
+<span class="comment"># ef=128: 620 qps, recall@10 = 0.94  ← Selected</span>
+<span class="comment"># ef=256: 380 qps, recall@10 = 0.97</span></code></pre>
+
+            <h4 class="font-black text-slate-900 dark:text-white uppercase mt-12">3. Tool Calling with Gemma 3</h4>
+            <p>
+                The breakthrough came from implementing structured tool calling. Gemma 3's instruction following capabilities allowed us to define precise schemas:
+            </p>
+            <pre class="text-sm text-slate-300 overflow-x-auto mt-6"><code>TOOL_SCHEMAS = {
+    <span class="string">"get_loan_balance"</span>: {
+        <span class="string">"description"</span>: <span class="string">"Retrieve current loan balance and payment status"</span>,
+        <span class="string">"parameters"</span>: {
+            <span class="string">"loan_id"</span>: {<span class="string">"type"</span>: <span class="string">"string"</span>, <span class="string">"pattern"</span>: <span class="string">r"^LN\d{8}$"</span>},
+            <span class="string">"customer_id"</span>: {<span class="string">"type"</span>: <span class="string">"string"</span>}
+        },
+        <span class="string">"required"</span>: [<span class="string">"loan_id"</span>]
+    },
+    <span class="string">"calculate_emi"</span>: {
+        <span class="string">"description"</span>: <span class="string">"Calculate EMI for new loan or restructuring"</span>,
+        <span class="string">"parameters"</span>: {
+            <span class="string">"principal"</span>: {<span class="string">"type"</span>: <span class="string">"number"</span>, <span class="string">"minimum"</span>: <span class="string">10000</span>},
+            <span class="string">"tenure_months"</span>: {<span class="string">"type"</span>: <span class="string">"integer"</span>, <span class="string">"minimum"</span>: <span class="string">6</span>, <span class="string">"maximum"</span>: <span class="string">84</span>},
+            <span class="string">"interest_rate"</span>: {<span class="string">"type"</span>: <span class="string">"number"</span>}
+        },
+        <span class="string">"required"</span>: [<span class="string">"principal"</span>, <span class="string">"tenure_months"</span>]
+    },
+    <span class="string">"check_eligibility"</span>: {
+        <span class="string">"description"</span>: <span class="string">"Check loan eligibility based on customer profile"</span>,
+        <span class="string">"parameters"</span>: {
+            <span class="string">"customer_id"</span>: {<span class="string">"type"</span>: <span class="string">"string"</span>},
+            <span class="string">"loan_type"</span>: {<span class="string">"enum"</span>: [<span class="string">"personal"</span>, <span class="string">"business"</span>, <span class="string">"gold"</span>]}
+        }
+    }
+}
+
+<span class="keyword">def</span> <span class="function">execute_tool_call</span>(tool_name: str, params: dict) -> dict:
+    <span class="keyword">if</span> tool_name == <span class="string">"get_loan_balance"</span>:
+        <span class="keyword">return</span> db.sql(<span class="string">f"""
+            SELECT loan_id, principal_amt, outstanding,
+                   next_due_date, days_past_due
+            FROM loans.loan_master
+            WHERE loan_id = '{params['loan_id']}'
+        """</span>).to_dict()
+
+    <span class="keyword">elif</span> tool_name == <span class="string">"calculate_emi"</span>:
+        <span class="comment"># EMI = P * r * (1+r)^n / ((1+r)^n - 1)</span>
+        P = params[<span class="string">'principal'</span>]
+        r = params[<span class="string">'interest_rate'</span>] / <span class="string">12</span> / <span class="string">100</span>
+        n = params[<span class="string">'tenure_months'</span>]
+        emi = P * r * (<span class="string">1</span>+r)**n / ((<span class="string">1</span>+r)**n - <span class="string">1</span>)
+        <span class="keyword">return</span> {<span class="string">"emi"</span>: round(emi, <span class="string">2</span>), <span class="string">"total_payment"</span>: round(emi*n, <span class="string">2</span>)}</code></pre>
+
+            <h4 class="font-black text-slate-900 dark:text-white uppercase mt-12">4. Query Routing Logic</h4>
+            <p>
+                The hybrid approach required intelligent query classification:
+            </p>
+            <pre class="text-sm text-slate-300 overflow-x-auto mt-6"><code><span class="keyword">from</span> typing <span class="keyword">import</span> Literal
+
+<span class="keyword">class</span> <span class="function">QueryRouter</span>:
+    <span class="keyword">def</span> <span class="function">classify</span>(self, query: str) -> Literal[<span class="string">"rag"</span>, <span class="string">"tool"</span>, <span class="string">"hybrid"</span>]:
+        <span class="comment"># Keywords suggesting structured data need</span>
+        tool_indicators = [
+            <span class="string">"balance"</span>, <span class="string">"emi"</span>, <span class="string">"due date"</span>, <span class="string">"amount"</span>,
+            <span class="string">"status"</span>, <span class="string">"eligible"</span>, <span class="string">"calculate"</span>, <span class="string">"my"</span>
+        ]
+
+        <span class="comment"># Keywords suggesting policy/procedural info</span>
+        rag_indicators = [
+            <span class="string">"policy"</span>, <span class="string">"procedure"</span>, <span class="string">"how to"</span>, <span class="string">"what is"</span>,
+            <span class="string">"guidelines"</span>, <span class="string">"rules"</span>, <span class="string">"can I"</span>, <span class="string">"eligible"</span>
+        ]
+
+        query_lower = query.lower()
+        has_tool = any(kw <span class="keyword">in</span> query_lower <span class="keyword">for</span> kw <span class="keyword">in</span> tool_indicators)
+        has_rag = any(kw <span class="keyword">in</span> query_lower <span class="keyword">for</span> kw <span class="keyword">in</span> rag_indicators)
+
+        <span class="keyword">if</span> has_tool <span class="keyword">and</span> has_rag:
+            <span class="keyword">return</span> <span class="string">"hybrid"</span>
+        <span class="keyword">elif</span> has_tool:
+            <span class="keyword">return</span> <span class="string">"tool"</span>
+        <span class="keyword">else</span>:
+            <span class="keyword">return</span> <span class="string">"rag"</span></code></pre>
+        </div>
+    </section>
+
+    <!-- Results & Impact -->
+    <section class="grid md:grid-cols-4 gap-12 mb-32">
+        <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Impact</h2>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Results & Metrics</h3>
+        </div>
+        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 p-6 rounded-2xl text-white">
+                    <div class="text-4xl font-black mb-2">92%</div>
+                    <div class="text-sm opacity-80 uppercase tracking-wider">Query Resolution Rate</div>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white">
+                    <div class="text-4xl font-black mb-2">&lt;2s</div>
+                    <div class="text-sm opacity-80 uppercase tracking-wider">Avg Response Time</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-2xl text-white">
+                    <div class="text-4xl font-black mb-2">10K+</div>
+                    <div class="text-sm opacity-80 uppercase tracking-wider">Daily Queries</div>
+                </div>
+            </div>
+
+            <h4 class="font-black text-slate-900 dark:text-white uppercase mt-12">Quantitative Impact</h4>
+            <ul class="space-y-4 mt-6">
+                <li><strong>Response Time:</strong> Reduced from 45 minutes to under 2 seconds average</li>
+                <li><strong>Accuracy:</strong> Improved from 77% to 94% on factual queries (measured against gold-standard Q&A set)</li>
+                <li><strong>Employee Productivity:</strong> Saved 2.5 hours per loan officer per day</li>
+                <li><strong>Training Time:</strong> New hire onboarding reduced from 3 months to 3 weeks</li>
+                <li><strong>Compliance:</strong> 100% audit trail on all AI-generated responses</li>
+            </ul>
+
+            <div class="bg-emerald-50 dark:bg-emerald-950/30 border-l-4 border-emerald-500 p-6 rounded-r-lg mt-8">
+                <h4 class="font-black text-emerald-700 dark:text-emerald-400 uppercase mb-3">Key Learnings</h4>
+                <ul class="space-y-3 text-lg">
+                    <li><strong>Chunk Size Matters:</strong> 512 tokens with 50-token overlap provided optimal retrieval for policy documents</li>
+                    <li><strong>Hybrid Approach is Essential:</strong> 40% of queries needed both RAG and tool calling</li>
+                    <li><strong>HNSW Tuning is Non-Trivia:</strong> ef_search=128 was the sweet spot for our recall/latency requirements</li>
+                    <li><strong>Tool Schemas Need Iteration:</strong> We refined our schemas 4 times based on error patterns</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Roadmap -->
+    <section class="grid md:grid-cols-4 gap-12 mb-32">
+        <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Roadmap</h2>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">What's Next</h3>
+        </div>
+        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+            <ul class="space-y-6">
+                <li class="flex gap-4">
+                    <span class="text-2xl">🎯</span>
+                    <div>
+                        <strong>Multi-turn Conversations:</strong> Enabling contextual follow-up questions with conversation memory
+                    </div>
+                </li>
+                <li class="flex gap-4">
+                    <span class="text-2xl">📊</span>
+                    <div>
+                        <strong>RAGAS Evaluation Pipeline:</strong> Automated quality scoring on faithfulness and relevance metrics
+                    </div>
+                </li>
+                <li class="flex gap-4">
+                    <span class="text-2xl">🔄</span>
+                    <div>
+                        <strong>Real-time Document Sync:</strong> Delta Lake CDC for instant index updates when policies change
+                    </div>
+                </li>
+                <li class="flex gap-4">
+                    <span class="text-2xl">🌐</span>
+                    <div>
+                        <strong>Multi-lingual Support:</strong> Hindi and Tamil language support for regional branches
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto py-12 px-6 border-t border-slate-100 dark:border-slate-800">
+        <p class="text-sm text-slate-400">© 2025 Vinit Sutar. Crafted with passion for data science.</p>
+    </footer>
+
+</body>
+</html>

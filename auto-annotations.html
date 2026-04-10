@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Auto-Annotation Pipeline | Vinit Sutar</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        ::selection {
+            background-color: white;
+            color: black;
+        }
+        ::-moz-selection {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-50 antialiased">
+
+    <nav class="max-w-4xl mx-auto py-8 px-6 flex justify-between items-center">
+        <a href="index.html" class="font-black uppercase tracking-tighter text-2xl">VS</a>
+        <a href="index.html" class="text-sm font-bold uppercase tracking-widest opacity-60 hover:opacity-100">← Back to Gallery</a>
+    </nav>
+
+    <header class="max-w-4xl mx-auto pt-20 pb-16 px-6">
+        <p class="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 mb-4">Case Study 01</p>
+        <h1 class="text-6xl font-black tracking-tighter mb-8 uppercase">Auto-Annotation Pipeline</h1>
+        <div class="flex flex-wrap gap-4">
+            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">Mask R-CNN</span>
+            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">PyTorch</span>
+            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">Active Learning</span>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-12 px-6 border-t border-slate-100 dark:border-slate-800">
+    
+    <section class="grid md:grid-cols-4 gap-12 mb-32">
+        <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Phase 01</h2>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Orchestrating the <br>Ground Truth</h3>
+        </div>
+        <div class="md:col-span-3 space-y-10 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+            <p>
+                The primary challenge in micro-organism detection is <strong>Label Noise</strong>. Traditional bounding boxes often fail in high-confluence microscopy where organisms overlap or exhibit stochastic boundaries. To mitigate this, we implemented a sophisticated data engineering pipeline centered on expert-verified <strong>Instance Segmentation</strong>.
+            </p>
+
+            <div class="space-y-8">
+                <div class="border-l-4 border-slate-900 dark:border-slate-100 pl-8 py-2">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">I. Infrastructure & Security 🔒</h4>
+                    <p class="text-lg opacity-90">
+                        We deployed a <strong>Dockerized CVAT (Computer Vision Annotation Tool)</strong> instance on a local workstation cluster. By hosting on-premise, we eliminated the latency overhead of 4K microscopy image uploads and ensured strict <strong>Data Sovereignty</strong>. The server was optimized with Nginx for concurrent access by multiple lab technicians, ensuring zero-lag navigation through multi-gigabyte datasets.
+                    </p>
+                </div>
+
+                <div class="border-l-4 border-slate-900 dark:border-slate-100 pl-8 py-2">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">II. Annotation Protocol & IAA 📏</h4>
+                    <p class="text-lg opacity-90">
+                        To ensure high <strong>Inter-Annotator Agreement (IAA)</strong>, we established a strict "Polygon-First" protocol. Lab technicians were trained to handle <strong>Occlusion</strong> by inferring the underlying boundary of overlapping cells. We used a double-blind review process for the initial 5% of the dataset, calculating <strong>Cohen's Kappa</strong> to ensure labeling consistency across the 15 species before scaling the operation.
+                    </p>
+                </div>
+
+                <div class="border-l-4 border-slate-900 dark:border-slate-100 pl-8 py-2">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">III. ETL & COCO Schema Mapping 🛠️</h4>
+                    <p class="text-lg opacity-90">
+                        I engineered a custom Python ETL pipeline to transform CVAT’s raw XML/JSON outputs into the <strong>COCO JSON 1.0 specification</strong>. This involved mapping class IDs to a unified ontology and calculating precise <strong>RLE (Run-Length Encoding)</strong> masks for small-scale organisms, which are essential for stabilizing the loss function during the training phase.
+                    </p>
+                </div>
+            </div>
+
+            
+        </div>
+    </section>
+
+    <section class="grid md:grid-cols-4 gap-12 mb-32">
+        <div class="space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Phase 02</h2>
+            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Inference & <br>Model Architecture</h3>
+        </div>
+        <div class="md:col-span-3 space-y-10 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+            <p>
+                Our modeling strategy prioritized <strong>Pixel-Level Precision</strong>. We chose Mask R-CNN over standard detectors to capture the morphological nuances (cilia, vacuoles, boundary irregularities) that define different microbial species.
+            </p>
+
+            <div class="space-y-8">
+                <div class="border-l-4 border-slate-900 dark:border-slate-100 pl-8 py-2">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">I. Backbone & FPN Design 🧠</h4>
+                    <p class="text-lg opacity-90">
+                        We utilized a <strong>ResNet-101-FPN</strong> (Feature Pyramid Network) backbone. The FPN was critical for multi-scale detection; it allowed the model to extract high-resolution features for small micro-organisms while maintaining a global semantic context for larger colonies. We implemented <strong>RoIAlign</strong> (Region of Interest Align) to prevent the quantization errors inherent in RoIPool, ensuring our masks remained pixel-perfect.
+                    </p>
+                </div>
+
+                <div class="border-l-4 border-slate-900 dark:border-slate-100 pl-8 py-2">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">II. Transfer Learning & Convergence ⚡</h4>
+                    <p class="text-lg opacity-90">
+                        Weights were initialized using <strong>COCO Pre-training</strong>. To prevent catastrophic forgetting, we used a staged "unfreezing" strategy: first training only the Mask and Box heads, then gradually unfreezing the ResNet backbone layers with a <strong>one-cycle learning rate schedule</strong>. This ensured the model adapted to the high-frequency textures of microscopy images without losing the generalized feature extraction capabilities of the base model.
+                    </p>
+                </div>
+
+                <div class="border-l-4 border-slate-900 dark:border-slate-100 pl-8 py-2">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">III. TensorRT & CUDA Optimization 🚀</h4>
+                    <p class="text-lg opacity-90">
+                        To hit the <3 minute inference target for 1,000+ images, we optimized the PyTorch graph using <strong>TensorRT</strong> for FP16 (Half-Precision) inference. By utilizing <strong>Asynchronous CUDA Streams</strong>, we parallelized the image pre-processing (normalization and resizing) with the GPU's forward pass, effectively eliminating CPU-side bottlenecks and maximizing GPU throughput.
+                    </p>
+                </div>
+            </div>
+
+            
+        </div>
+    </section>
+
+    <section class="grid md:grid-cols-4 gap-12 mb-32">
+    <div class="space-y-4">
+        <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Phase 03</h2>
+        <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">The Active Learning <br>Flywheel</h3>
+    </div>
+    <div class="md:col-span-3 space-y-10 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+        <p>
+            The final phase centered on scaling the dataset to <strong>7,500 expert-verified instances</strong> (500 per species) while maintaining an efficient <strong>Human-in-the-Loop (HITL)</strong> workflow. We moved from passive data collection to an active regime where the model navigated the unlabelled pool to find the highest informational gain.
+        </p>
+
+        <div class="space-y-12">
+            <div class="border-l-4 border-slate-900 dark:border-slate-100 pl-8 py-2">
+                <h4 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">I. The Math of Uncertainty: Shannon Entropy 🧠</h4>
+                <p class="text-lg opacity-90 mb-6">
+                    We utilized <strong>Shannon Entropy</strong> <em>(H)</em> as our primary acquisition function. Instead of simple confidence thresholds, entropy allowed us to quantify the total uncertainty across all 15 species labels. This ensured that microbiologists only reviewed "edge cases" where the model's decision boundaries were most fragile. The entropy for a given image $x$ is defined as:
+                </p>
+                <div class="my-8 text-2xl text-center">
+                    $$H(y|x) = -\sum_{i=1}^{15} p(y_i|x) \log_2 p(y_i|x)$$
+                </div>
+                <p class="text-lg opacity-90">
+                    When the model's output was "flat"—meaning it couldn't distinguish between species—the entropy value spiked. By sending these specific images to <strong>CVAT</strong>, we maximized the <strong>Information Gain</strong> per human annotation.
+                </p>
+            </div>
+
+            
+
+            <div class="border-l-4 border-slate-900 dark:border-slate-100 pl-8 py-2">
+                <h4 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">II. MLOps Infrastructure & Automation ⚙️</h4>
+                <p class="text-lg opacity-90">
+                    To support this scale, we engineered a <strong>Dockerized pipeline</strong> that functioned as a recursive engine. High-entropy predictions were automatically routed to a priority CVAT queue via a custom API middleware. This automation reduced the manual data management overhead and ensured that the <strong>INR 6,00,000</strong> saved by avoiding annotation services from external vendors.
+                </p>
+            </div>
+        </div>
+        </div>
+    </section>
+    </main>
+
+</body>
+</html>

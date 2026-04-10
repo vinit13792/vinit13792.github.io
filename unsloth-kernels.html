@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why should you use Unsloth? | Vinit Sutar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        ::selection {
+            background-color: white;
+            color: black;
+        }
+        ::-moz-selection {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased">
+
+    <header class="max-w-4xl mx-auto pt-24 pb-16 px-6">
+        <h1 class="text-5xl md:text-6xl font-black tracking-tighter mb-6 uppercase">Why should you use Unsloth?</h1>
+        <p class="text-2xl text-slate-500 font-medium mb-8">An exploration of the benefits and performance improvements offered by Unsloth's optimized kernels.</p>
+        <blockquote class="border-l-4 border-blue-500 pl-6 py-2 text-xl italic text-slate-400">
+            "Architecture is about the trade-offs we choose, not just the tools we use."
+        </blockquote>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6">
+        
+        <section class="mb-24 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-8 uppercase">The Kitchen Analogy: Why Your GPU is Slow?</h2>
+            <p class="mb-6">
+                Imagine you are a world-class chef (the <strong>GPU</strong>). You are incredibly fast at chopping vegetables. However, your ingredients are stored in a massive cold storage warehouse (<strong>VRAM</strong>) across the street.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 bg-slate-50 dark:bg-slate-900 p-8 rounded-xl mb-8">
+                <div>
+                    <h4 class="font-bold text-red-500 mb-2 uppercase text-sm">Traditional Method</h4>
+                    <p class="text-base">You run across the street to get one carrot, chop it, run back to store it, then run back across the street for one onion. You spend 90% of your time running and only 10% cooking.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-green-500 mb-2 uppercase text-sm">The Unsloth Way</h4>
+                    <p class="text-base">Unsloth gives you a small, ultra-fast prep table (<strong>SRAM</strong>) right in the kitchen. It brings a whole box of ingredients at once, lets you finish the entire soup, and you only walk to the warehouse once to deliver the final pot.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="md:col-span-3 space-y-8 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+            <p>
+                Low-Rank Adaptation (LoRA) is like trying to update a massive encyclopedia by only writing on two small sticky notes (Matrices A and B). It's much faster than rewriting the whole book.
+            </p>
+            
+            <div class="border-l-4 border-blue-500 pl-8 py-4 bg-blue-50/30 dark:bg-blue-900/10">
+                <h4 class="font-bold text-slate-900 dark:text-white mb-4">The Logic of the Backward Pass</h4>
+                <p class="text-lg mb-6">
+                    To figure out how to update your "sticky notes," the computer needs to look at your original data <em>X</em> and see how far off the prediction was (<em>&nabla; Y</em>).
+                </p>
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-lg font-mono text-center mb-6">
+                    <span class="text-blue-500"><em>&nabla; A<em></em></em></span> = <span class="text-slate-400">Input</span> <em>x</em> (<span class="text-slate-400">Error</span> <em>x</em> <span class="text-slate-400">Note B</span>)
+                </div>
+                <p class="text-base opacity-80">
+                    <strong>The Problem:</strong> Standard tools calculate the <em>(Error x Note B)</em> part, save it to the warehouse, wait, read it back, and <em>then</em> multiply by the Input. 
+                    <br><br>
+                    <strong>The Unsloth Solution:</strong> It calculates the whole line in one breath. It holds the Input, the Error, and the Note in its "hands" at the same time. No waiting. No running.
+                </p>
+            </div>
+        </div>
+
+        <section class="max-w-4xl mx-auto py-24 px-6 border-t border-slate-100 dark:border-slate-800">
+            <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-8 uppercase text-center">So, why should you care?</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-4xl mb-4">⏳</div>
+                    <h4 class="font-bold mb-2">Save Time</h4>
+                    <p class="text-sm opacity-70">A 24-hour training job becomes a 12-hour job. You get to iterate twice as fast.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl mb-4">💳</div>
+                    <h4 class="font-bold mb-2">Save Money</h4>
+                    <p class="text-sm opacity-70">If you're renting GPUs by the hour, cutting time in half literally doubles your budget.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h4 class="font-bold mb-2">Hardware Freedom</h4>
+                    <p class="text-sm opacity-70">You can train larger models on smaller, cheaper GPUs (like an RTX 3090/4090) instead of needing a $30k A100.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto py-16 px-6 bg-slate-50 dark:bg-slate-900/50 rounded-3xl mb-32 border border-slate-100 dark:border-slate-800">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-blue-500 mb-4">The Roadmap</h2>
+                <h3 class="text-3xl font-black text-slate-900 dark:text-white uppercase">How Unsloth Rewires the Brain</h3>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12 relative">
+                <div class="hidden md:block absolute top-1/4 left-0 w-full h-0.5 bg-slate-200 dark:bg-slate-800 -z-10"></div>
+
+                <div class="space-y-6 bg-white dark:bg-slate-950 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-black text-xl shadow-lg shadow-blue-500/20">01</div>
+                    <h4 class="font-black uppercase tracking-tight text-slate-900 dark:text-white">Fused Math</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        <strong>The Logic:</strong> Instead of doing math step-by-step, we combine 10 equations into one. <br><br>
+                        <span class="text-blue-500 font-bold">The Win:</span> No more waiting for "middle-man" calculations to save to memory.
+                    </p>
+                </div>
+
+                <div class="space-y-6 bg-white dark:bg-slate-950 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-black text-xl shadow-lg shadow-purple-500/20">02</div>
+                    <h4 class="font-black uppercase tracking-tight text-slate-900 dark:text-white">Smart Storage</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        <strong>The Logic:</strong> We only save the data that is <em>absolutely</em> necessary for the next step.<br><br>
+                        <span class="text-purple-500 font-bold">The Win:</span> Slashes VRAM usage by 70%, preventing those annoying "Out of Memory" crashes.
+                    </p>
+                </div>
+
+                <div class="space-y-6 bg-white dark:bg-slate-950 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 hover:scale-105 transition-transform duration-300">
+                    <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center font-black text-xl shadow-lg shadow-emerald-500/20">03</div>
+                    <h4 class="font-black uppercase tracking-tight text-slate-900 dark:text-white">Direct Access</h4>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        <strong>The Logic:</strong> We bypass the "manager" (PyTorch) and speak directly to the GPU hardware.<br><br>
+                        <span class="text-emerald-500 font-bold">The Win:</span> 2x faster training speed. Your 24-hour job now takes 12.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-4 gap-12 mb-32 border-t border-slate-100 dark:border-slate-800 pt-16">
+            <div class="space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Section 01</h2>
+                <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Fused Cross-Entropy <br>Loss</h3>
+            </div>
+            <div class="md:col-span-3 space-y-8 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+                <p>
+                    Think of your model's raw output as a line of 128,000 cars (<strong>Vocab Size</strong>) trying to pass through a single toll booth (<strong>The Loss Function</strong>) at the same time.
+                </p>
+                
+                <div class="border-l-4 border-blue-500 pl-8 py-4 bg-blue-50/30 dark:bg-blue-900/10">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">The "Traffic Jam" Problem</h4>
+                    <p class="text-lg mb-6">
+                        Standard PyTorch forces every single car to stop, park in a massive lot (<strong>VRAM</strong>), and wait for the attendant to check their tickets one by one. 
+                    </p>
+                    <p class="text-base opacity-80 mb-6">
+                        This "parking lot" takes up an enormous amount of space. If you have too many cars, the lot overflows, and your program crashes with an <em>Out of Memory</em> error.
+                    </p>
+
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-lg font-mono text-center mb-6">
+                        <span class="text-blue-500">Loss</span> = 
+                        <span class="text-slate-400">&minus; &sum;</span> 
+                        <span class="text-blue-500">Target</span> 
+                        &times; log(
+                        <span class="text-slate-400">Softmax(Guesses)</span>
+                        )
+
+                    </div>
+
+                    <h4 class="font-bold text-blue-600 dark:text-blue-400">The Unsloth Solution: "The High-Speed Flyover"</h4>
+                    <p class="text-base opacity-80">
+                        Unsloth builds a high-speed express lane. Instead of parking all 128,000 cars in the VRAM lot, it processes them in <strong>small chunks</strong> (small groups of cars) directly on the road (<strong>SRAM</strong>). 
+                        <br><br>
+                        It calculates the loss for a few cars, discards the data it no longer needs, and moves to the next chunk immediately. The massive "parking lot" is never needed, which means you can handle way more traffic (larger batch sizes) without ever crashing.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-4 gap-12 mb-32 border-t border-slate-100 dark:border-slate-800 pt-16">
+            <div class="space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Section 02</h2>
+                <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Rotary Position <br>Embeddings</h3>
+            </div>
+            <div class="md:col-span-3 space-y-8 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+                <p>
+                    Imagine every word in your sentence is a person standing in a dark room. To tell them apart, you give each person a <strong>Compass</strong>. As they move down the line, their compass needle "rotates" to a specific angle. The first person is at 0°, the second at 15°, and so on.
+                </p>
+                
+                <div class="border-l-4 border-blue-500 pl-8 py-4 bg-blue-50/30 dark:bg-blue-900/10">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">The "Paperwork" Problem</h4>
+                    <p class="text-lg mb-6">
+                        Standard PyTorch handles this like a slow bureaucratic office. To rotate a word's position:
+                        <br>1. It writes down the word's current location on a piece of paper (<strong>VRAM</strong>).
+                        <br>2. It sends that paper to the "Rotation Dept" to calculate the new angle.
+                        <br>3. It writes the result on a <em>new</em> piece of paper and sends it back to the warehouse.
+                    </p>
+                    <p class="text-base opacity-80 mb-6">
+                        For a long sentence (like 8,000 words), this creates millions of tiny "papers" that clog up your GPU's memory and slow everything down.
+                    </p>
+
+                    
+
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-lg font-mono text-center mb-6">
+                        <span class="text-blue-500"><em>Rotated_Word</em></span> = <span class="text-slate-400">Word</span> <em>times</em> <span class="text-blue-500">\begin{pmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix}</span>
+                    </div>
+
+                    <h4 class="font-bold text-blue-600 dark:text-blue-400">The Unsloth Solution: "In-Place Spinning"</h4>
+                    <p class="text-base opacity-80">
+                        Unsloth eliminates the paperwork. Instead of sending data back and forth to the warehouse (VRAM), it "spins" the word's position <strong>directly in the GPU's hands</strong> (SRAM). 
+                        <br><br>
+                        Because the math happens "in-place," the GPU never has to stop to write down intermediate steps. This makes the "Attention" part of the model (where the model actually thinks) run up to 40% faster because it's not waiting for the delivery of positional data.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-4 gap-12 mb-32 border-t border-slate-100 dark:border-slate-800 pt-16">
+            <div class="space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Section 03</h2>
+                <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">LoRA Gradient <br>Fusion</h3>
+            </div>
+            <div class="md:col-span-3 space-y-8 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+                <p>
+                    Imagine you're an architect trying to update a massive skyscraper. Instead of rebuilding the whole tower, you place a thin sheet of <strong>Trace Paper</strong> over the blueprints and only draw the specific changes you want.
+                </p>
+                
+                <div class="border-l-4 border-amber-500 pl-8 py-4 bg-amber-50/30 dark:bg-amber-900/10">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">The "Photocopy" Problem</h4>
+                    <p class="text-lg mb-6">
+                        Standard PyTorch is like an architect who makes a full-sized photocopy of the <em>entire</em> building every time they want to check a single line on their trace paper. 
+                    </p>
+                    <p class="text-base opacity-80 mb-6">
+                        These "photocopies" (intermediate gradients) are massive. They take forever to print and they pile up until they fill the entire office (<strong>VRAM</strong>), causing everything to come to a grinding halt.
+                    </p>
+
+                    
+
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-lg font-mono text-center mb-6">
+                        <span class="text-amber-500"><em>&nabla; A</em></span> = <span class="text-slate-400">Input</span> x (<span class="text-slate-400">Error</span> x <span class="text-amber-500">Paper B</span>)
+                    </div>
+
+                    <h4 class="font-bold text-amber-600 dark:text-amber-400">The Unsloth Solution: "Direct Sketching"</h4>
+                    <p class="text-base opacity-80">
+                        Unsloth stops making photocopies. Instead of saving huge intermediate steps to the office floor (VRAM), it does the math "in its head" (SRAM). 
+                        <br><br>
+                        It looks at the original blueprint, calculates the change needed for the trace paper, and writes it down <strong>instantly</strong>. Because it never prints those massive intermediate "photocopies," your office stays clean, your GPU stays cool, and you can finish the design in half the time.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-4 gap-12 mb-32 border-t border-slate-100 dark:border-slate-800 pt-16">
+            <div class="space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Section 04</h2>
+                <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">RMSNorm <br>Fusion</h3>
+            </div>
+            <div class="md:col-span-3 space-y-8 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+                <p>
+                    Think of <strong>RMSNorm</strong> as a filter that makes sure no single piece of data is too loud or too quiet. It keeps everything in balance.
+                </p>
+                
+                <div class="border-l-4 border-emerald-500 pl-8 py-4 bg-emerald-50/30 dark:bg-emerald-900/10">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">The "Stop-and-Go" Problem</h4>
+                    <p class="text-lg mb-6">
+                        Standard tools treat this like a 3-step assembly line: 
+                        <br>1. Square the numbers. 
+                        <br>2. Calculate the average. 
+                        <br>3. Divide the original numbers by that average. 
+                    </p>
+                    <p class="text-base opacity-80 mb-6">
+                        Each time you finish a step, you have to put your tools down, save your work to the warehouse (VRAM), and pick it back up for the next step. 
+                    </p>
+
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-lg font-mono text-center mb-6">
+                        <span class="text-emerald-500"><em>y</em></span> = <span class="text-slate-400"><em>Input</em></span> / <span class="text-slate-400"><em>&#8730;{Average(Input^2)}</em></span>
+                    </div>
+
+                    <h4 class="font-bold text-emerald-600 dark:text-emerald-400">The Unsloth Solution</h4>
+                    <p class="text-base opacity-80">
+                        Unsloth does all three steps in a single "breath." It loads the data into the GPU's fast internal memory, applies the whole math filter at once, and writes out the final, clean result. This "Fusion" removes the time-wasting trips to the warehouse entirely.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid md:grid-cols-4 gap-12 mb-32 border-t border-slate-100 dark:border-slate-800 pt-16">
+            <div class="space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Section 05</h2>
+                <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">On-the-Fly <br>Dequantization</h3>
+            </div>
+            <div class="md:col-span-3 space-y-8 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
+                <p>
+                    Think of <strong>4-bit Quantization</strong> as an IKEA bookshelf. In the box, it's flat, compact, and fits in the trunk of your car (<strong>Disk Space/VRAM</strong>). But you can't put books on a flat-packed shelf; you have to assemble it first.
+                </p>
+
+                <div class="border-l-4 border-purple-500 pl-8 py-4 bg-purple-50/30 dark:bg-purple-900/10">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">The "Living Room" Problem</h4>
+                    <p class="text-lg mb-6">
+                        Standard tools (like Bitsandbytes) assemble the entire bookshelf in your living room (<strong>GPU Memory</strong>) before they use it. 
+                    </p>
+                    <p class="text-base opacity-80 mb-6">
+                        Suddenly, that compact box now takes up the whole room. If you have 100 bookshelves to use, your room "runs out of space" (<strong>OOM Error</strong>) almost immediately.
+                    </p>
+
+                    <div class="bg-white dark:bg-slate-900 p-6 rounded-lg font-mono text-center mb-6">
+                        <span class="text-purple-500"><em>Y</em></span> = <span class="text-slate-400">Input</span> x (<span class="text-purple-500">Assembled Shelf</span>)
+                    </div>
+
+                    <h4 class="font-bold text-purple-600 dark:text-purple-400">The Unsloth Solution: "Ghost Assembly"</h4>
+                    <p class="text-base opacity-80">
+                        Unsloth is like a magician. It <strong>never actually builds the shelf</strong> in your room. 
+                        <br><br>
+                        Instead, it reaches into the box, grabs a single piece, uses it for a fraction of a second to hold a book (calculate the math), and then puts it back in the box. To your GPU, the room always looks empty because the "assembled" version only exists in the magician's hands for a split second. This is how you fit 100 bookshelves into a tiny apartment.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto py-24 px-6 border-t border-slate-100 dark:border-slate-800">
+            <div class="grid md:grid-cols-2 gap-16">
+                
+                <div class="space-y-12">
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-blue-500 mb-4">What it is</h4>
+                        <p class="text-xl leading-relaxed opacity-80">
+                            <strong>Open Source Fine-tuning & RL framework for LLMs.</strong> A lightweight, ultra-fast library that rewrites the core "engines" (kernels) of LLM fine-tuning from scratch using <strong>OpenAI Triton</strong>.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-emerald-500 mb-4">Why it matters</h4>
+                        <p class="text-xl leading-relaxed opacity-80">
+                            It shatters the <strong>Memory Wall</strong>. It allows engineers to train models 2x faster and use 70% less memory, making professional-grade AI accessible on consumer hardware.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="space-y-12">
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-purple-500 mb-4">How it works</h4>
+                        <p class="text-xl leading-relaxed opacity-80">
+                            Through <strong>Kernel Fusion</strong>. It combines multiple math steps into one, keeping data in the GPU's fastest memory (SRAM) and avoiding slow round-trips to the "warehouse" (VRAM).
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-amber-500 mb-4">When to use it</h4>
+                        <p class="text-xl leading-relaxed opacity-80">
+                            Ideal for <strong>Single-GPU fine-tuning</strong> (LoRA/QLoRA) of Llama, Mistral, or Gemma models when you need to maximize speed and batch size on limited VRAM.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-20 p-8 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+                <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-red-500 mb-6 text-center">When NOT to use it</h4>
+                <div class="grid md:grid-cols-2 gap-8 text-sm opacity-70">
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>If you require complex <strong>Multi-GPU Parallelism</strong> (DeepSpeed/FSDP) that Unsloth doesn't yet fully support.</li>
+                        <li>If you are working with extremely niche architectures that don't have custom kernels written for them yet.</li>
+                    </ul>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>When "developer simplicity" is more important than hardware efficiency (standard PyTorch is easier to debug).</li>
+                        <li>If your project requires strict adherence to vanilla Hugging Face implementations for legal or compliance reasons.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="max-w-4xl mx-auto py-24 px-6 border-t border-slate-100 dark:border-slate-800 text-center">
+            <h2 class="text-4xl font-black tracking-tighter mb-8 uppercase">Conclusion</h2>
+            <p class="text-xl text-slate-500 mb-12 max-w-2xl mx-auto">
+                Unsloth is a testament to the fact that high-level tools are just abstractions. When we strip away the bloat and align our mathematics with the physical constraints of the GPU, we unlock efficiencies that were previously thought impossible. 
+            </p>
+            <a href="index.html" class="inline-block bg-slate-900 text-white dark:bg-white dark:text-slate-950 px-12 py-4 font-bold uppercase tracking-widest hover:scale-105 transition-transform">
+                Back to Portfolio
+            </a>
+        </footer>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "vinit-sutar-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio website for Vinit Sutar - Data Science Researcher",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve .",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.700.0"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
