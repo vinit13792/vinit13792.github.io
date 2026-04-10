@@ -1,7 +1,5 @@
-// Chat API using Zai GLM-5 on AWS Bedrock
-// Requires AWS credentials configured in Vercel environment variables
-
-import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime';
+// Chat API using OpenRouter (free models)
+// Requires OPENROUTER_API_KEY environment variable in Vercel
 
 // System prompt with resume context
 const SYSTEM_PROMPT = `You are Vinit Sutar's AI assistant, helping recruiters and visitors learn about his professional background. You have access to his complete resume and portfolio information.
@@ -34,7 +32,7 @@ Vinit Sutar is a Data Science Researcher specializing in Multi-Agent Systems and
    - Active Learning pipeline saving ₹6,00,000 in annotation costs
 
 ## Technical Skills
-- **LLM Stack**: LangChain, LlamaIndex, Hugging Face, AWS Bedrock, OpenAI/Anthropic APIs
+- **LLM Stack**: LangChain, LlamaIndex, Hugging Face, OpenAI API, Anthropic API
 - **ML**: PyTorch, TensorFlow, XGBoost, Scikit-learn
 - **MLOps**: MLflow, Azure Databricks, AWS SageMaker, Docker
 - **Vector DBs**: Pinecone, Weaviate, FAISS, Databricks Vector Search
@@ -53,63 +51,80 @@ Vinit Sutar is a Data Science Researcher specializing in Multi-Agent Systems and
 - LinkedIn: linkedin.com/in/vinit13792
 - GitHub: github.com/vinit13792`;
 
-// Initialize Bedrock client
-const getClient = () => {
-  return new BedrockRuntimeClient({
-    region: process.env.AWS_REGION || 'us-east-1',
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    },
-  });
-};
+// Free models available on OpenRouter (priority order)
+const FREE_MODELS = [
+  'meta-llama/llama-3.2-3b-instruct:free',      // Meta Llama 3.2 3B (free)
+  'meta-llama/llama-3.1-8b-instruct:free',      // Meta Llama 3.1 8B (free)
+  'google/gemma-3-4b-it:free',                   // Google Gemma 3 4B (free)
+  'qwen/qwen-2.5-7b-instruct:free',              // Qwen 2.5 7B (free)
+  'huggingfaceh4/zephyr-7b-beta:free',           // Zephyr 7B (free)
+  'mistralai/mistral-7b-instruct:free',          // Mistral 7B (free tier)
+];
 
-// Call Zai GLM-5 on Bedrock
-async function callGLM5(messages) {
-  const client = getClient();
+// Call OpenRouter API
+async function callOpenRouter(messages) {
+  const apiKey = process.env.OPENROUTER_API_KEY;
 
-  // Format messages for GLM-5
-  const formattedMessages = messages.map(msg => ({
-    role: msg.role,
-    content: msg.content
-  }));
-
-  // GLM-5 request payload
-  const payload = {
-    model: 'zai.glm-5',
-    messages: [
-      { role: 'system', content: SYSTEM_PROMPT },
-      ...formattedMessages
-    ],
-    temperature: 0.7,
-    top_p: 0.9,
-    max_tokens: 1024,
-  };
-
-  try {
-    const command = new InvokeModelCommand({
-      modelId: 'zai.glm-5',
-      contentType: 'application/json',
-      accept: 'application/json',
-      body: JSON.stringify(payload),
-    });
-
-    const response = await client.send(command);
-    const responseBody = JSON.parse(new TextDecoder().decode(response.body));
-
+  if (!apiKey) {
+    console.error('OPENROUTER_API_KEY not configured');
     return {
-      content: responseBody.choices?.[0]?.message?.content || responseBody.output || responseBody.text,
-      usage: responseBody.usage || {}
-    };
-  } catch (error) {
-    console.error('Bedrock API error:', error);
-
-    // Fallback response if Bedrock fails
-    return {
-      content: "I'm having trouble connecting to my AI backend right now. Please reach out to Vinit directly at vinit.sutar@email.com or connect on LinkedIn (linkedin.com/in/vinit13792) for any questions about his experience and expertise.",
+      content: "The chatbot is not fully configured yet. Please reach out to Vinit directly at vinit.sutar@email.com or connect on LinkedIn (linkedin.com/in/vinit13792).",
       error: true
     };
   }
+
+  // Format messages for OpenRouter
+  const formattedMessages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...messages
+  ];
+
+  // Try each model in order until one works
+  for (const model of FREE_MODELS) {
+    try {
+      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          'HTTP-Referer': 'https://vinitsutar.dev', // Optional: your site URL
+          'X-Title': 'Vinit Sutar Portfolio Chatbot' // Optional: your app name
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: formattedMessages,
+          temperature: 0.7,
+          top_p: 0.9,
+          max_tokens: 1024,
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error(`Model ${model} failed:`, errorData);
+        continue; // Try next model
+      }
+
+      const data = await response.json();
+
+      if (data.choices && data.choices[0]?.message?.content) {
+        return {
+          content: data.choices[0].message.content,
+          model: model,
+          usage: data.usage || {}
+        };
+      }
+    } catch (error) {
+      console.error(`Model ${model} error:`, error.message);
+      continue; // Try next model
+    }
+  }
+
+  // All models failed
+  return {
+    content: "I'm having trouble connecting to my AI backend right now. Please reach out to Vinit directly at vinit.sutar@email.com or connect on LinkedIn (linkedin.com/in/vinit13792) for any questions.",
+    error: true
+  };
 }
 
 export default async function handler(req, res) {
@@ -145,7 +160,7 @@ export default async function handler(req, res) {
     ];
 
     // Call the LLM
-    const response = await callGLM5(messages);
+    const response = await callOpenRouter(messages);
 
     if (response.error) {
       return res.status(200).json({
@@ -156,6 +171,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       response: response.content,
+      model: response.model,
       usage: response.usage
     });
 

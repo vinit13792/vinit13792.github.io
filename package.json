@@ -7,9 +7,7 @@
     "dev": "npx serve .",
     "deploy": "vercel --prod"
   },
-  "dependencies": {
-    "@aws-sdk/client-bedrock-runtime": "^3.700.0"
-  },
+  "dependencies": {},
   "engines": {
     "node": ">=18.x"
   }

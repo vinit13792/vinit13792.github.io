@@ -6,7 +6,7 @@ A premium glassmorphism portfolio showcasing data science projects, technical bl
 
 - **Frontend**: HTML5, CSS3 (Custom Glassmorphism Design), Vanilla JavaScript
 - **Backend**: Vercel Serverless Functions (Node.js)
-- **AI**: Zai GLM-5 on AWS Bedrock
+- **AI**: OpenRouter (Llama 3.2 3B - Free tier)
 - **Deployment**: Vercel
 
 ## Features
@@ -30,7 +30,7 @@ A premium glassmorphism portfolio showcasing data science projects, technical bl
 ├── rag-pipeline.html       # Case study: RAG at Shriram Finance
 ├── propensity-models.html  # Case study: Propensity Models
 ├── vercel.json             # Vercel deployment config
-├── package.json            # Dependencies for serverless functions
+├── package.json            # Dependencies
 ├── assets/
 │   ├── css/
 │   │   ├── styles.css      # Main stylesheet
@@ -42,7 +42,7 @@ A premium glassmorphism portfolio showcasing data science projects, technical bl
 │   ├── contact.js          # Contact form API
 │   ├── analytics.js        # Analytics tracking API
 │   ├── projects.js         # Projects data API
-│   ├── chat.js             # AI Chat API (AWS Bedrock)
+│   ├── chat.js             # AI Chat API (OpenRouter)
 │   └── resume.json         # Structured resume data for chatbot
 └── README.md
 ```
@@ -50,9 +50,6 @@ A premium glassmorphism portfolio showcasing data science projects, technical bl
 ## Development
 
 ```bash
-# Install dependencies (for serverless functions)
-npm install
-
 # Serve locally
 npx serve .
 # or
@@ -73,15 +70,29 @@ vercel --prod
 
 ### Environment Variables (Required for Chatbot)
 
-Set these in Vercel Dashboard → Settings → Environment Variables:
+Set this in Vercel Dashboard → Settings → Environment Variables:
 
 ```
-AWS_ACCESS_KEY_ID=your_access_key
-AWS_SECRET_ACCESS_KEY=your_secret_key
-AWS_REGION=us-east-1
+OPENROUTER_API_KEY=your_openrouter_api_key
 ```
 
-The AWS credentials need access to AWS Bedrock and the Zai GLM-5 model.
+Get your free API key at [openrouter.ai](https://openrouter.ai/).
+
+## AI Chatbot Configuration
+
+The chatbot uses OpenRouter's free tier models with automatic fallback:
+
+1. **Llama 3.2 3B** (free) - Primary
+2. **Llama 3.1 8B** (free) - Fallback
+3. **Gemma 3 4B** (free) - Fallback
+4. **Qwen 2.5 7B** (free) - Fallback
+5. **Zephyr 7B** (free) - Fallback
+
+The system prompt contains Vinit's complete resume context in `api/chat.js`.
+
+### To modify the chatbot behavior:
+- Edit `SYSTEM_PROMPT` in `api/chat.js`
+- Update `api/resume.json` for structured data changes
 
 ## Adding New Projects
 
@@ -102,14 +113,6 @@ The AWS credentials need access to AWS Bedrock and the Zai GLM-5 model.
 2. Create corresponding HTML detail page following the pattern of existing case studies.
 
 3. Update `api/projects.js` with the same project data for API consistency.
-
-## AI Chatbot Configuration
-
-The chatbot uses Zai GLM-5 on AWS Bedrock. The system prompt is embedded in `api/chat.js` with comprehensive context about Vinit's experience.
-
-To modify the chatbot behavior:
-- Edit the `SYSTEM_PROMPT` in `api/chat.js`
-- Update `api/resume.json` for structured data changes
 
 ## Contact
 
