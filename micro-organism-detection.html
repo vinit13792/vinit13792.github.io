@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro-organism Identification System | Vinit Sutar</title>
+    <meta name="description" content="Computer vision pipeline for micro-organism detection and counting at HiMedia Laboratories.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <style>
+        .article-content { max-width: 900px; margin: 0 auto; }
+        .article-content p { margin-bottom: 1.5rem; line-height: 1.8; }
+        .article-content h2 { font-size: 1.75rem; font-weight: 800; margin: 3rem 0 1.5rem; text-transform: uppercase; letter-spacing: -0.02em; }
+        .article-content h3 { font-size: 1.25rem; font-weight: 700; margin: 2rem 0 1rem; }
+        .article-content ul { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-content li { margin-bottom: 0.5rem; }
+        .article-content pre { background: rgba(79, 70, 229, 0.1); border: 1px solid rgba(79, 70, 229, 0.2); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+        .article-content code { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--text-primary); }
+        .tech-badge { display: inline-block; padding: 0.5rem 1rem; background: rgba(79, 70, 229, 0.15); border: 1px solid rgba(79, 70, 229, 0.25); border-radius: 100px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0.25rem; }
+        .impact-card { background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1)); border: 1px solid rgba(79, 70, 229, 0.2); border-radius: 16px; padding: 2rem; margin: 1rem 0; }
+        .impact-stat { font-size: 2.5rem; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
+    </style>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦠</text></svg>">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-mesh"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="/" class="nav-logo">VS</a>
+                <ul class="nav-links">
+                    <li><a href="/" class="nav-link">← Back to Portfolio</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="section" style="padding-bottom: 0;">
+        <div class="container">
+            <div class="section-header fade-in" style="text-align: left; margin-bottom: 2rem;">
+                <span class="section-label">Case Study • Computer Vision</span>
+                <h1 class="section-title" style="font-size: clamp(2.5rem, 6vw, 4rem);">Micro-organism Identification System</h1>
+                <p style="color: var(--text-secondary); font-size: 1.125rem; max-width: 700px;">
+                    Computer vision pipeline replacing expensive hardware for micro-organism detection, counting, and growth rate calculation
+                </p>
+                <div style="margin-top: 1.5rem;">
+                    <span class="tech-badge">OpenCV</span>
+                    <span class="tech-badge">PyTorch</span>
+                    <span class="tech-badge">Mask R-CNN</span>
+                    <span class="tech-badge">Raspberry Pi</span>
+                    <span class="tech-badge">AWS SageMaker</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="section" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="article-content glass-card fade-in" style="padding: 3rem;">
+
+                <!-- Impact Summary -->
+                <div class="impact-card" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center;">
+                        <div class="impact-stat">94%</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Detection Accuracy</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="impact-stat">40%</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Accuracy Improvement</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="impact-stat">₹1L+</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Hardware Savings</div>
+                    </div>
+                </div>
+
+                <!-- What It Is -->
+                <h2>What It Is</h2>
+                <p>
+                    A production computer vision system that detects, counts, and calculates growth rates of micro-organisms in petri dishes. This replaced a ₹1,00,000 proprietary hardware solution with a software-based approach that achieved higher accuracy (94% vs 80%) while eliminating recurring calibration costs.
+                </p>
+                <p>
+                    The system processes high-resolution microscopy images to identify 15 different micro-organism species, track their growth over time, and generate automated quality control reports for manufacturing compliance.
+                </p>
+
+                <!-- The Problem -->
+                <h2>The Problem</h2>
+                <p>
+                    HiMedia Laboratories relied on a commercial colony counter instrument for quality control of their culture media products. Critical issues:
+                </p>
+                <ul>
+                    <li><strong>High Cost:</strong> ₹1,00,000 per unit with annual maintenance contracts</li>
+                    <li><strong>Limited Accuracy:</strong> 80% detection rate with frequent false positives at colony boundaries</li>
+                    <li><strong>Rigid Workflow:</strong> Proprietary software couldn't integrate with internal LIMS (Laboratory Information Management System)</li>
+                    <li><strong>Species Limitation:</strong> Only supported 5 pre-programmed organism types vs. 15+ species in production</li>
+                    <li><strong>Calibration Drift:</strong> Required monthly recalibration, causing 2-day production delays</li>
+                </ul>
+
+                <!-- How It Works -->
+                <h2>How It Works</h2>
+
+                <h3>1. Image Acquisition Pipeline</h3>
+                <p>
+                    Custom imaging rig using Raspberry Pi + High-resolution CMOS camera:
+                </p>
+                <pre><code># Raspberry Pi camera configuration
+import picamera
+from picamera import PiCamera
+
+camera = PiCamera()
+camera.resolution = (4056, 3040)  # 12MP resolution
+camera.iso = 100                   # Low noise
+camera.shutter_speed = 100000      # 100ms exposure
+
+# Automated capture with controlled lighting
+def capture_petri_dish(sample_id):
+    with picamera.PiCamera() as camera:
+        camera.start_preview()
+        time.sleep(2)  # Auto-adjust exposure
+        camera.capture(f'samples/{sample_id}.jpg')
+        camera.stop_preview()</code></pre>
+
+                <h3>2. Preprocessing Pipeline</h3>
+                <p>
+                    OpenCV-based preprocessing for consistent image quality:
+                </p>
+                <pre><code>import cv2
+import numpy as np
+
+def preprocess_image(image_path):
+    """Preprocessing pipeline for colony detection."""
+    img = cv2.imread(image_path)
+
+    # Convert to LAB color space for better segmentation
+    lab = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+
+    # CLAHE (Contrast Limited Adaptive Histogram Equalization)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    l_clahe = clahe.apply(l)
+
+    # Merge and convert back
+    lab_clahe = cv2.merge([l_clahe, a, b])
+    enhanced = cv2.cvtColor(lab_clahe, cv2.COLOR_LAB2BGR)
+
+    # Denoising
+    denoised = cv2.fastNlMeansDenoisingColored(enhanced, None, 10, 10, 7, 21)
+
+    return denoised</code></pre>
+
+                <h3>3. Detection Pipeline</h3>
+                <p>
+                    Multi-stage detection combining classical CV with deep learning:
+                </p>
+                <ul>
+                    <li><strong>Stage 1:</strong> Watershed segmentation for initial region proposals</li>
+                    <li><strong>Stage 2:</strong> Mask R-CNN for instance segmentation and species classification</li>
+                    <li><strong>Stage 3:</strong> Post-processing filters based on morphological features</li>
+                </ul>
+
+                <pre><code>import torch
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
+
+def detect_colonies(image, model_path):
+    """Run Mask R-CNN inference for colony detection."""
+    cfg = get_cfg()
+    cfg.merge_from_file("configs/mask_rcnn_R_101_FPN_3x.yaml")
+    cfg.MODEL.WEIGHTS = model_path
+    cfg.MODEL.ROI_HEADS.NUM_CLASSES = 15  # 15 species
+
+    predictor = DefaultPredictor(cfg)
+    outputs = predictor(image)
+
+    # Extract instances
+    instances = outputs["instances"].to("cpu")
+    boxes = instances.pred_boxes.tensor.numpy()
+    scores = instances.scores.numpy()
+    classes = instances.pred_classes.numpy()
+    masks = instances.pred_masks.numpy()
+
+    return boxes, scores, classes, masks</code></pre>
+
+                <h3>4. Growth Rate Calculation</h3>
+                <p>
+                    Temporal analysis of colony growth:
+                </p>
+                <pre><code>def calculate_growth_rate(detections_over_time):
+    """
+    Calculate exponential growth rate from time-series detections.
+
+    Growth model: N(t) = N0 * e^(kt)
+    where k is the growth rate constant
+    """
+    import numpy as np
+    from scipy.optimize import curve_fit
+
+    def exponential_growth(t, N0, k):
+        return N0 * np.exp(k * t)
+
+    times = np.array([d['time'] for d in detections_over_time])
+    counts = np.array([d['count'] for d in detections_over_time])
+
+    # Fit exponential model
+    popt, _ = curve_fit(exponential_growth, times, counts, p0=[1, 0.1])
+    N0, k = popt
+
+    # Doubling time
+    doubling_time = np.log(2) / k
+
+    return {
+        'initial_count': N0,
+        'growth_rate': k,
+        'doubling_time_hours': doubling_time
+    }</code></pre>
+
+                <!-- Why It Matters -->
+                <h2>Why It Matters</h2>
+                <div class="impact-card">
+                    <h4 style="margin-bottom: 1rem;">Business Impact</h4>
+                    <ul>
+                        <li><strong>Cost Savings:</strong> Eliminated ₹1,00,000 hardware cost per unit</li>
+                        <li><strong>Accuracy Gain:</strong> Improved from 80% to 94% (40% relative improvement)</li>
+                        <li><strong>Scalability:</strong> Deployed across 5 labs with centralized model updates</li>
+                        <li><strong>Throughput:</strong> Processed 500+ samples/day vs 200 with old system</li>
+                        <li><strong>Integration:</strong> Full API integration with existing LIMS workflow</li>
+                    </ul>
+                </div>
+
+                <!-- When to Use -->
+                <div class="comparison-grid" style="margin-top: 2rem;">
+                    <div class="impact-card" style="border-color: rgba(34, 197, 94, 0.3); padding: 1.5rem;">
+                        <h4 style="color: #22c55e; margin-bottom: 1rem;">✅ When to Use</h4>
+                        <ul style="font-size: 0.9rem; color: var(--text-secondary);">
+                            <li>High-volume quality control with consistent imaging conditions</li>
+                            <li>Known, bounded set of target organisms (classification)</li>
+                            <li>Need for API integration with existing systems</li>
+                            <li>Cost-sensitive environments where hardware ROI is critical</li>
+                            <li>Time-series growth analysis requirements</li>
+                        </ul>
+                    </div>
+                    <div class="impact-card" style="border-color: rgba(239, 68, 68, 0.3); padding: 1.5rem;">
+                        <h4 style="color: #ef4444; margin-bottom: 1rem;">⛔ When to Avoid</h4>
+                        <ul style="font-size: 0.9rem; color: var(--text-secondary);">
+                            <li>Novel organism types not in training data (would need retraining)</li>
+                            <li>Highly variable lighting/imaging conditions</li>
+                            <li>Regulatory requirements for certified medical devices</li>
+                            <li>Real-time processing needs (pipeline has ~3s latency)</li>
+                            <li>Extreme colony overlap (>70% confluence)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Technical Stack -->
+                <h2>Technical Stack</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                    <div class="impact-card" style="padding: 1.25rem;">
+                        <h4 style="font-weight: 700; margin-bottom: 0.5rem;">ML/DL</h4>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary);">PyTorch, Detectron2, Mask R-CNN, OpenCV</p>
+                    </div>
+                    <div class="impact-card" style="padding: 1.25rem;">
+                        <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Infrastructure</h4>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary);">AWS SageMaker, Raspberry Pi, Docker</p>
+                    </div>
+                    <div class="impact-card" style="padding: 1.25rem;">
+                        <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Deployment</h4>
+                        <p style="font-size: 0.875rem; color: var(--text-secondary);">TensorRT, ONNX Runtime, FastAPI</p>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                    <a href="/" class="btn btn-glass">← Back to Portfolio</a>
+                    <a href="auto-annotations.html" class="btn btn-primary">Related: Auto-Annotation Pipeline →</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 Vinit Sutar. Crafted with passion for data science.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

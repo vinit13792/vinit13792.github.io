@@ -83,39 +83,42 @@
 
             <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl">
                 <h4 class="font-black text-slate-900 dark:text-white uppercase mb-6">System Architecture</h4>
-                <pre class="text-sm text-slate-300 overflow-x-auto"><code>┌────────────────────────────────────────────────────────────────────┐
+                <pre class="text-sm text-slate-300 overflow-x-auto"><code>
+                    
+┌────────────────────────────────────────────────────────────────────┐
 │                    DATA LAYER (Azure Databricks)                   │
-├────────────┬────────────┬────────────┬────────────┬───────────────┤
+├────────────┬────────────┬────────────┬────────────┬─────────────── ┤
 │   Customer │    Loan    │ Transaction│  Campaign  │    External    │
 │   Master   │    Data    │   History  │   History  │     Data       │
 └──────┬─────┴──────┬─────┴──────┬─────┴──────┬─────┴───────┬───────┘
        │            │            │            │             │
        └────────────┴────────────┴────────────┴─────────────┘
-                              │
-                              ▼
-       ┌─────────────────────────────────────────────────────────────┐
+                                 │
+                                 ▼
+       ┌───────────────────────────────────────────────────────────── ┐
        │              FEATURE ENGINEERING PIPELINE                    │
-       │  • RFM Features (Recency, Frequency, Monetary)             │
-       │  • Temporal Features (trend, seasonality, velocity)        │
-       │  • Behavioral Features (channel preference, response rate) │
-       │  • Derived Features (liquidity score, investment horizon)  │
+       │  • RFM Features (Recency, Frequency, Monetary)               │
+       │  • Temporal Features (trend, seasonality, velocity)          │
+       │  • Behavioral Features (channel preference, response rate)   │
+       │  • Derived Features (liquidity score, investment horizon)    │
        └────────────────────────┬────────────────────────────────────┘
                                 │
                                 ▼
        ┌─────────────────────────────────────────────────────────────┐
        │                  MODEL LAYER                                │
-       │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
-       │  │  Propensity │  │  Tenure     │  │  Channel            │ │
-       │  │  Score      │  │  Prediction │  │  Recommendation     │ │
-       │  │  (XGBoost)  │  │  (Survival) │  │  (Multi-armed Bandit)│ │
-       │  └─────────────┘  └─────────────┘  └─────────────────────┘ │
+       │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+       │  │  Propensity │  │  Tenure     │  │  Channel            │  │
+       │  │  Score      │  │  Prediction │  │  Recommendation     │  │
+       │  │  (XGBoost)  │  │  (Survival) │  │  (Multi-armed       |  |
+       |  |             |  |                |             Bandit) │  │
+       │  └─────────────┘  └─────────────┘  └─────────────────────┘  │
        └────────────────────────┬────────────────────────────────────┘
                                 │
                                 ▼
        ┌─────────────────────────────────────────────────────────────┐
        │              CAMPAIGN OPTIMIZATION LAYER                    │
-       │  • Market Mix Modelling (media attribution)                │
-       │  • Budget Optimization (linear programming)                │
+       │  • Market Mix Modelling (media attribution)                 │
+       │  • Budget Optimization (linear programming)                 │
        │  • A/B Testing Framework                                    │
        └─────────────────────────────────────────────────────────────┘</code></pre>
             </div>
