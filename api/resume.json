@@ -1,29 +1,27 @@
 {
   "basics": {
     "name": "Vinit Sutar",
-    "title": "Data Science Researcher & LLM Specialist",
-    "email": "vinit.sutar@email.com",
-    "linkedin": "https://linkedin.com/in/vinit13792",
+    "title": "Lead Data Scientist & AI Architect",
+    "email": "vinit.d.sutar@gmail.com",
+    "phone": "9945564234",
+    "linkedin": "https://linkedin.com/in/vinitsutar",
     "github": "https://github.com/vinit13792",
-    "summary": "Data Science Researcher specializing in building scalable LLM applications and delivering high-impact business solutions through multi-agent systems. 5+ years of experience driving ₹520 Crores in revenue impact across fintech, manufacturing, and analytics domains.",
+    "summary": "Versatile Lead Data Scientist and AI Architect with 6+ years of experience building scalable machine learning and Generative AI pipelines. Expert in orchestrating multi-agent systems, production-grade RAG, and deterministic tool-calling (Claude Sonnet, Gemma 3, Llama 3.3) on AWS Bedrock and Azure Databricks.",
     "location": "Bangalore, India",
     "availability": "Available for opportunities"
   },
   "stats": {
-    "years_experience": "5+",
+    "years_experience": "6+",
     "revenue_impact": "₹520 Crores",
-    "projects_completed": "15+",
+    "projects_completed": "16+",
     "accuracy_achieved": "94%"
   },
   "skills": {
-    "programming": ["Python", "SQL", "PySpark", "JavaScript"],
-    "ml_frameworks": ["PyTorch", "TensorFlow", "Scikit-learn", "XGBoost", "LightGBM"],
-    "llm_stack": ["LangChain", "LlamaIndex", "Hugging Face", "OpenAI API", "Anthropic API", "AWS Bedrock"],
-    "vector_databases": ["Pinecone", "Weaviate", "Chroma", "FAISS", "Databricks Vector Search"],
-    "mlops": ["MLflow", "DVC", "Azure Databricks", "AWS SageMaker", "Docker"],
-    "databases": ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Delta Lake"],
-    "cloud": ["Azure", "AWS", "GCP"],
-    "visualization": ["Plotly", "Streamlit", "Tableau", "Power BI"],
+    "generative_ai": ["AWS Bedrock", "Claude Sonnet 4.6", "Llama 3.3", "Gemma 3", "LangChain", "Strands Agent", "KIRO", "RAG", "AWS OpenSearch", "Prompt Engineering", "Unsloth", "Crawl4AI"],
+    "ml_frameworks": ["PyTorch", "TensorFlow", "Scikit-Learn", "Statsmodels", "XGBoost", "Prophet", "Detectron2", "Mask R-CNN"],
+    "causal_inference": ["DoWhy", "Causal-Learn", "PyDoe3", "Robyn"],
+    "languages": ["Python", "SQL (Postgres, BigQuery, MySQL)"],
+    "mlops": ["Azure Databricks", "MLflow", "Docker", "Google Vertex AI", "AWS S3", "CloudFront"],
     "specializations": [
       "Multi-Agent Systems",
       "RAG Pipelines",
@@ -31,10 +29,34 @@
       "Computer Vision",
       "Time Series Forecasting",
       "Causal Inference",
-      "Market Mix Modelling"
+      "Market Mix Modelling",
+      "A/B Testing"
     ]
   },
+  "certifications": [
+    { "name": "Databricks Certified Generative AI Engineer", "issuer": "Databricks", "date": "May 2025" },
+    { "name": "AI Agents Fundamentals", "issuer": "HuggingFace", "date": "Feb 2025" },
+    { "name": "Advanced Attribution Modelling", "issuer": "MSquared Club", "date": "Jan 2025" },
+    { "name": "Building and Evaluating Advanced RAG", "issuer": "DeepLearning.ai", "date": "Jan 2025" },
+    { "name": "Generative AI with LLM", "issuer": "DeepLearning.ai", "date": "April 2024" },
+    { "name": "Data Science and Machine Learning", "issuer": "Scaler Academy", "date": "December 2023" }
+  ],
   "experience": [
+    {
+      "company": "A5E Consulting",
+      "client": "Nielsen Media",
+      "position": "Senior Consulting AI Engineer",
+      "location": "Bangalore",
+      "period": "Nov 2025 — Present",
+      "highlights": [
+        "Architected end-to-end LLM system for Pre-Game Watchability Index across 14 geographies for Amazon Prime Video Marketing",
+        "Engineered Strands agent data ingestion pipeline aggregating ELO scores, team form, head-to-head metrics, and 5-year fan sentiment",
+        "Reduced model complexity by consolidating to single Claude Sonnet model with custom deterministic scoring rubric",
+        "Directed AI-assisted frontend using KIRO agent for real-time LLM observability dashboard on serverless AWS stack",
+        "Integrated Claude Code with custom skill sets via Repowise to reduce per-task token costs"
+      ],
+      "technologies": ["Strands Agent", "Claude Code", "KIRO", "AWS Bedrock", "OpenSearch", "Claude Sonnet 4.6", "Crawl4AI", "Langfuse"]
+    },
     {
       "company": "Shriram Finance Limited",
       "position": "Senior Chief Manager - Data Science",
@@ -42,13 +64,12 @@
       "period": "Mar 2025 — Nov 2025",
       "team_size": 5,
       "highlights": [
-        "Led team for Propensity Models, Delinquency Modelling, SMS Engine, LLM Fine-tuning, FD Cohorts, Market Mix Modelling",
-        "Increased FD conversions by ₹520 Crores through improved propensity models",
-        "Implemented Market Mix Modelling optimizing campaigns to save 5% on marketing spend",
-        "Engineered RAG pipeline on Azure Databricks with HNSW indexing for vector search",
-        "Enabled Tool Calling capabilities with Gemma 3 for precise information retrieval"
+        "Led team of 5 Data Scientists, upskilling them in GenAI architectures and advanced ML techniques",
+        "Improved Propensity Models increasing FD conversions by ₹520 Crores",
+        "Implemented Market Mix Modelling saving 5% on marketing spend",
+        "Engineered RAG pipeline on Azure Databricks with HNSW indexing and Tool Calling with Gemma 3"
       ],
-      "technologies": ["XGBoost", "Azure Databricks", "RAG", "Gemma 3", "MLflow", "Delta Lake"]
+      "technologies": ["XGBoost", "Azure Databricks", "RAG", "Gemma 3", "MLflow", "Delta Lake", "Robyn", "Prophet"]
     },
     {
       "company": "Conneqt Digital",
@@ -57,12 +78,11 @@
       "location": "Bangalore",
       "period": "Apr 2024 — Feb 2025",
       "highlights": [
-        "Developed conversion attribution model using GLMNET and Logistic Regression for South Africa Region (98% accuracy)",
-        "Implemented conversion package to calculate incremental lift with model error ±5%",
-        "Implemented 2^(n-1) fractional factorial design halving time for Randomized Control Trials",
-        "Developed propensity score matching using DTW, LSH, and FAISS for 200k stores"
+        "Developed GLMNET and Logistic Regression attribution models with 98% accuracy",
+        "Implemented 2^(n-1) fractional factorial designs halving RCT time",
+        "Built propensity score matching pipeline (DTW, LSH, Faiss) for 200k stores"
       ],
-      "technologies": ["GLMNET", "Statsmodels", "Dynamic Time Warping", "Locality Sensitive Hashing", "FAISS"]
+      "technologies": ["GLMNET", "Statsmodels", "Dynamic Time Warping", "Locality Sensitive Hashing", "FAISS", "Causal Inference"]
     },
     {
       "company": "Impact Analytics",
@@ -70,12 +90,11 @@
       "location": "Bangalore",
       "period": "July 2022 — Apr 2024",
       "highlights": [
-        "Modernised Prophet pipeline improving regression model accuracy by 3%",
-        "Developed imputation logic improving accuracy from 0.3% to 0.7%",
-        "Designed store clustering pipeline using Dynamic Time Warping",
-        "Mentored team of two in client and process knowledge transfer"
+        "Modernised Prophet pipeline improving regression accuracy by 3%",
+        "Designed DTW-based store clustering improving imputation from 0.3% to 0.7%",
+        "Mentored team of two on inventory pipelines"
       ],
-      "technologies": ["Prophet", "Time Series", "Dynamic Time Warping", "Python"]
+      "technologies": ["Prophet", "Time Series", "Dynamic Time Warping", "Python", "Vertex AI"]
     },
     {
       "company": "HiMedia Laboratories",
@@ -84,14 +103,23 @@
       "period": "Apr 2021 — July 2022",
       "highlights": [
         "Improved micro-organism detection accuracy by 40% using OpenCV",
-        "Developed annotation pipeline using Raspberry Pi + CMOS camera saving ₹80/image for 500 images",
-        "Implemented Active Learning using Mask R-CNN saving ₹6,00,000 in annotation costs",
-        "Saved ₹1,00,000 in instrument costs while increasing accuracy from 80% to 94%"
+        "Developed annotation pipeline saving INR 80/image for 500 images across 15 species",
+        "Implemented Active Learning using Mask R-CNN saving ₹6,00,000",
+        "Increased accuracy from 80% to 94% while saving ₹1,00,000 in instrument costs"
       ],
-      "technologies": ["OpenCV", "PyTorch", "Mask R-CNN", "Raspberry Pi", "Active Learning"]
+      "technologies": ["OpenCV", "PyTorch", "Mask R-CNN", "Raspberry Pi", "Active Learning", "AWS SageMaker"]
     }
   ],
   "projects": [
+    {
+      "name": "Pre-Game Watchability Index",
+      "company": "Nielsen Media (Amazon Prime)",
+      "category": "GenAI",
+      "description": "End-to-end LLM system computing watchability scores for 14 geographies, improving ad-placement targeting for Amazon Prime Video Marketing.",
+      "impact": "Multi-agent pipeline with Claude Sonnet 4.6, reduced inference costs via model consolidation",
+      "technologies": ["Strands Agent", "Claude Sonnet 4.6", "AWS Bedrock", "OpenSearch", "KIRO"],
+      "featured": true
+    },
     {
       "name": "Enterprise RAG Pipeline with Tool Calling",
       "company": "Shriram Finance Limited",
@@ -99,7 +127,7 @@
       "description": "High-scale RAG pipeline on Azure Databricks with HNSW indexing, enabling Tool Calling capabilities with Gemma 3 for precise information retrieval.",
       "impact": "10,000+ daily queries with <2s response time, 94% accuracy",
       "technologies": ["Azure Databricks", "RAG", "HNSW", "Gemma 3", "LangChain"],
-      "details": "Built hybrid RAG system combining dense vector retrieval with structured tool calling. Implemented query classification, document ingestion pipeline processing 50,000+ documents, and Gemma 3 integration for intelligent response generation."
+      "featured": true
     },
     {
       "name": "Propensity Models for FD Products",
@@ -107,8 +135,8 @@
       "category": "Analytics",
       "description": "ML-powered propensity scoring and campaign optimization driving incremental FD conversions.",
       "impact": "₹520 Crores incremental revenue, 5% marketing cost savings",
-      "technologies": ["XGBoost", "Market Mix Modelling", "Bayesian Inference", "PyMC"],
-      "details": "Led team to build end-to-end propensity modeling system with 247 engineered features. Implemented Bayesian Market Mix Modelling for channel attribution. Achieved 312% conversion lift and 78% reduction in cost per acquisition."
+      "technologies": ["XGBoost", "Market Mix Modelling", "Bayesian Inference", "Robyn"],
+      "featured": true
     },
     {
       "name": "Auto-Annotation Pipeline",
@@ -117,7 +145,7 @@
       "description": "Active Learning approach using Mask R-CNN to reduce manual annotation efforts.",
       "impact": "Saved ₹6,00,000 in annotation costs",
       "technologies": ["Mask R-CNN", "PyTorch", "Active Learning", "OpenCV"],
-      "details": "Implemented sophisticated data engineering pipeline for expert-verified Instance Segmentation. Used Active Learning to intelligently select samples for annotation, dramatically reducing labeling effort while maintaining high model quality."
+      "featured": true
     },
     {
       "name": "Micro-organism Identification",
@@ -126,55 +154,48 @@
       "description": "Detection pipeline to count and calculate growth rate of micro-organisms.",
       "impact": "94% accuracy, ₹1,00,000 instrument cost savings",
       "technologies": ["OpenCV", "PyTorch", "Mask R-CNN", "Computer Vision"],
-      "details": "Developed computer vision pipeline replacing expensive hardware with software solution. Improved detection accuracy by 40% compared to existing algorithms."
-    },
-    {
-      "name": "Unsloth: Kernel Anatomy",
-      "company": "Technical Blog",
-      "category": "GenAI",
-      "description": "Deep dive into custom Triton kernels for LLM optimization.",
-      "impact": "2x faster LLM training with reduced VRAM usage",
-      "technologies": ["Triton", "CUDA", "LLMs", "Optimization"],
-      "details": "Technical analysis of how Unsloth's custom Triton kernels bypass memory bottlenecks in transformer training. Explored forward/backward pass optimizations and memory-efficient attention mechanisms."
+      "featured": true
     },
     {
       "name": "Conversion Attribution Model",
       "company": "Conneqt Digital - AB InBev",
       "category": "Analytics",
-      "description": "Multi-touch attribution for South Africa region marketing",
-      "impact": "98% accuracy, fractional factorial RCTs halving experiment time",
-      "technologies": ["GLMNET", "Logistic Regression", "Causal Inference", "Propensity Score Matching"],
-      "details": "Built attribution model using GLMNET for feature selection and regularized logistic regression. Implemented propensity score matching with DTW and LSH for 200k stores."
+      "description": "Multi-touch attribution using GLMNET and propensity score matching.",
+      "impact": "98% accuracy, halved RCT time with fractional factorial design",
+      "technologies": ["GLMNET", "Logistic Regression", "Causal Inference", "DTW", "FAISS"],
+      "featured": false
     },
     {
       "name": "Store Clustering & Forecasting",
       "company": "Impact Analytics",
       "category": "Analytics",
-      "description": "Modernized forecasting pipelines with improved accuracy",
-      "impact": "3% accuracy improvement, sales forecasting optimization",
-      "technologies": ["Prophet", "Time Series", "Dynamic Time Warping", "Imputation"],
-      "details": "Redesigned forecasting pipeline with trend extraction from hierarchies. Developed novel imputation logic and store clustering using time-aware DTW."
+      "description": "Modernized forecasting pipelines with DTW-based store clustering.",
+      "impact": "3% accuracy improvement, imputation improved from 0.3% to 0.7%",
+      "technologies": ["Prophet", "Time Series", "Dynamic Time Warping"],
+      "featured": false
     }
   ],
-  "education": {
-    "degree": "Bachelor of Engineering",
-    "field": "Computer Science",
-    "institution": "University of Mumbai"
-  },
-  "certifications": [],
+  "education": [
+    {
+      "institution": "Jain University",
+      "degree": "B.Tech in Electronics and Communication Engineering",
+      "location": "Bangalore",
+      "year": "2019"
+    },
+    {
+      "institution": "MSBTE",
+      "degree": "Diploma in Electronics and Tele-Communication Engineering",
+      "location": "Mumbai",
+      "year": "2014"
+    }
+  ],
   "languages": ["English", "Hindi"],
   "interests": [
     "Multi-Agent Systems",
     "LLM Applications",
     "RAG Pipelines",
     "Computer Vision",
+    "Causal Inference",
     "Open Source AI"
-  ],
-  "publications": [
-    {
-      "title": "Unsloth: Kernel Anatomy",
-      "type": "Technical Blog",
-      "url": "unsloth-kernels.html"
-    }
   ]
 }
