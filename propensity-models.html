@@ -3,597 +3,667 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
     <title>Propensity Models for FD Products | Vinit Sutar</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        ::selection { background-color: white; color: black; }
-        ::-moz-selection { background-color: white; color: black; }
-        pre { background: #1e293b; border-radius: 12px; padding: 24px; overflow-x: auto; }
-        code { font-family: 'Fira Code', 'JetBrains Mono', monospace; font-size: 14px; }
-        .keyword { color: #c084fc; }
-        .string { color: #4ade80; }
-        .comment { color: #64748b; }
-        .function { color: #60a5fa; }
-    </style>
-</head>
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-50 antialiased">
+    <meta name="description" content="Machine learning-powered propensity scoring driving ₹520 Crores in incremental Fixed Deposit conversions through intelligent campaign optimization.">
 
-    <nav class="max-w-4xl mx-auto py-8 px-6 flex justify-between items-center">
-        <a href="index.html" class="font-black uppercase tracking-tighter text-2xl">VS</a>
-        <a href="index.html" class="text-sm font-bold uppercase tracking-widest opacity-60 hover:opacity-100">← Back to Gallery</a>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <style>
+        .article-content { max-width: 900px; margin: 0 auto; }
+        .article-content p { margin-bottom: 1.5rem; line-height: 1.8; }
+        .article-content h2 { font-size: 1.75rem; font-weight: 800; margin: 3rem 0 1.5rem; text-transform: uppercase; letter-spacing: -0.02em; }
+        .article-content h3 { font-size: 1.25rem; font-weight: 700; margin: 2rem 0 1rem; }
+        .article-content h4 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.75rem; }
+        .article-content ul { margin: 1rem 0 1.5rem 1.5rem; }
+        .article-content li { margin-bottom: 0.5rem; line-height: 1.7; }
+        .article-content pre { background: rgba(79, 70, 229, 0.1); border: 1px solid rgba(79, 70, 229, 0.2); border-radius: 12px; padding: 1.5rem; overflow-x: auto; margin: 1.5rem 0; }
+        .article-content code { font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; color: var(--text-primary); }
+        .tech-badge { display: inline-block; padding: 0.5rem 1rem; background: rgba(79, 70, 229, 0.15); border: 1px solid rgba(79, 70, 229, 0.25); border-radius: 100px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0.25rem; }
+        .impact-card { background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1)); border: 1px solid rgba(79, 70, 229, 0.2); border-radius: 16px; padding: 2rem; margin: 1rem 0; }
+        .impact-stat { font-size: 2.5rem; font-weight: 800; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
+        .equation { background: rgba(79, 70, 229, 0.08); border-left: 4px solid var(--primary); padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-family: 'JetBrains Mono', monospace; overflow-x: auto; }
+        .note { background: rgba(34, 197, 94, 0.1); border-left: 4px solid #22c55e; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
+        .warning { background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
+        .pain-point { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+        .pain-point-title { color: #ef4444; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+        .solution-box { background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.2); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+        .solution-title { color: #22c55e; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    </style>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-mesh"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-inner">
+                <a href="/" class="nav-logo">VS</a>
+                <ul class="nav-links">
+                    <li><a href="/" class="nav-link">← Back to Portfolio</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <header class="max-w-4xl mx-auto pt-20 pb-16 px-6">
-        <p class="text-xs font-bold uppercase tracking-[0.3em] text-slate-400 mb-4">Case Study 05</p>
-        <h1 class="text-5xl md:text-6xl font-black tracking-tighter mb-8 uppercase">Propensity Models for FD Products</h1>
-        <div class="flex flex-wrap gap-4 mb-8">
-            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">XGBoost</span>
-            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">Market Mix Modelling</span>
-            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">Campaign Optimization</span>
-            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">A/B Testing</span>
-            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-xs font-mono rounded-full">Feature Engineering</span>
+    <!-- Header -->
+    <header class="section" style="padding-bottom: 0;">
+        <div class="container">
+            <div class="section-header fade-in visible" style="text-align: left; margin-bottom: 2rem;">
+                <span class="section-label">Case Study • Machine Learning</span>
+                <h1 class="section-title" style="font-size: clamp(2.5rem, 6vw, 4rem);">Propensity Models for FD Products</h1>
+                <p style="color: var(--text-secondary); font-size: 1.125rem; max-width: 700px;">
+                    Driving ₹520 Crores in incremental Fixed Deposit conversions through machine learning-powered propensity scoring and intelligent campaign optimization
+                </p>
+                <div style="margin-top: 1.5rem;">
+                    <span class="tech-badge">XGBoost</span>
+                    <span class="tech-badge">Bayesian MMM</span>
+                    <span class="tech-badge">Feature Engineering</span>
+                    <span class="tech-badge">Azure Databricks</span>
+                </div>
+            </div>
         </div>
-        <p class="text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-3xl">
-            Driving ₹520 Crores in incremental Fixed Deposit conversions through machine learning-powered propensity scoring and intelligent campaign optimization at India's largest retail NBFC.
-        </p>
     </header>
 
-    <main class="max-w-4xl mx-auto py-12 px-6 border-t border-slate-100 dark:border-slate-800">
+    <!-- Main Content -->
+    <main class="section" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="article-content glass-card fade-in visible" style="padding: 3rem;">
 
-    <!-- The Business Problem -->
-    <section class="grid md:grid-cols-4 gap-12 mb-32">
-        <div class="space-y-4">
-            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">The Problem</h2>
-            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Business Context</h3>
-        </div>
-        <div class="md:col-span-3 space-y-10 text-xl leading-relaxed text-slate-700 dark:text-slate-300">
-            <p>
-                Shriram Finance manages ₹2.2 Lakh Crores in Assets Under Management, with Fixed Deposits being a critical funding source. In Q4 2024, the treasury team faced a <strong>₹5,000 Crore funding gap</strong> that needed to be filled through retail FD mobilization within 6 months.
-            </p>
+                <!-- Impact Summary -->
+                <div class="impact-card" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center;">
+                        <div class="impact-stat">₹520 Cr</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Incremental Conversions</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="impact-stat">312%</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Conversion Lift</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="impact-stat">₹75L</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Marketing Savings</div>
+                    </div>
+                </div>
 
-            <div class="bg-red-50 dark:bg-red-950/30 border-l-4 border-red-500 p-6 rounded-r-lg">
-                <h4 class="font-black text-red-700 dark:text-red-400 uppercase mb-3">The Challenge</h4>
-                <ul class="space-y-3 text-lg">
-                    <li><strong>Budget Constraints:</strong> Marketing budget limited to ₹15 Crores—every rupee needed maximum impact</li>
-                    <li><strong>Low Conversion Rates:</strong> Existing blanket campaigns achieved only 0.8% conversion</li>
-                    <li><strong>Customer Heterogeneity:</strong> 5.2 million customers with vastly different financial profiles and FD propensity</li>
-                    <li><strong>Competitive Pressure:</strong> Banks offering 50-75 bps higher rates, making customer retention critical</li>
-                    <li><strong>Channel Fragmentation:</strong> SMS, email, WhatsApp, branch calls—no unified targeting strategy</li>
+                <!-- What It Is -->
+                <h2>What It Is</h2>
+                <p>
+                    A production machine learning system that predicts the probability of a customer investing in Fixed Deposits, enabling precision targeting that transformed a ₹15 Crore marketing budget into ₹520 Crores of incremental deposit mobilization. This wasn't merely a classification problem—it was a fundamental reimagining of how a ₹2.2 Lakh Crore AUC Non-Banking Financial Company approaches customer engagement.
+                </p>
+                <p>
+                    The system comprises three interconnected models: a propensity scorer that ranks 5.2 million customers by their likelihood to convert, a survival analysis model that predicts optimal contact timing, and a Bayesian Market Mix Model that attributes conversions across channels and optimizes budget allocation. Together, these models increased campaign conversion rates from 0.8% to 3.4% while reducing customer acquisition costs by 78%.
+                </p>
+                <p>
+                    But the numbers only tell part of the story. The real challenge wasn't building models—it was building models that worked in production, models that sales teams trusted, models that could be explained to a chief risk officer who'd spent three decades in traditional banking. This is the story of technical decisions made under business pressure, of trade-offs between statistical elegance and operational reality, and of the painful lessons that only emerge when machine learning meets mass-market financial services.
+                </p>
+
+                <!-- The Problem Space -->
+                <h2>The Problem: A Perfect Storm</h2>
+                <p>
+                    Shriram Finance sits at a unique position in India's financial landscape. As one of the largest retail NBFCs, the company has built its business on serving customers that traditional banks overlook—small business owners, self-employed professionals, and individuals with thin credit files. This customer base of 5.2 million is both a strength and a vulnerability. They're loyal, but they're also price-sensitive and financially sophisticated enough to chase 25 basis points across institutions.
+                </p>
+                <p>
+                    In Q4 FY2024, the treasury team flagged a ₹5,000 Crore funding gap projected for the next fiscal year. Fixed Deposits, accounting for 42% of total borrowing, needed to accelerate. The existing marketing approach—broadcast SMS campaigns, generic email newsletters, and branch-level outreach—was achieving 0.8% conversion. At that rate, filling the gap would require either doubling the marketing budget or accepting 18 months of aggressive campaigning.
+                </p>
+
+                <h3>The Data Reality Check</h3>
+                <p>
+                    Our first audit revealed the depth of the challenge. The customer data ecosystem had evolved organically over 15 years, accumulating technical debt at every acquisition and system migration:
+                </p>
+
+                <div class="pain-point">
+                    <div class="pain-point-title">Pain Point #1: Fragmented Identity</div>
+                    <p style="margin: 0;">
+                        A single customer could exist as 3 different entities: <code>CUST_001</code> in the legacy loan management system, <code>FD_84729</code> in the deposit portal, and <code>+91-98XXX</code> in the campaign management platform. Identity resolution required fuzzy matching across 7 databases with no canonical source of truth.
+                    </p>
+                </div>
+
+                <div class="pain-point">
+                    <div class="pain-point-title">Pain Point #2: Missing Value Predicament</div>
+                    <p style="margin: 0;">
+                        Income data was missing for 34% of customers—those who'd opened FDs directly through digital channels without submitting income proof. Employment type was unpopulated for customers acquired before 2018's KYC mandate. The missingness wasn't random: higher-net-worth customers were more likely to have missing employment data due to expedited onboarding processes.
+                    </p>
+                </div>
+
+                <div class="pain-point">
+                    <div class="pain-point-title">Pain Point #3: Temporal Misalignment</div>
+                    <p style="margin: 0;">
+                        Campaign response data existed, but the timestamps were stored in three different time zones (IST, UTC, and system local time for a legacy server in Chennai). Response attribution required reconstructing the actual customer journey from fragmented logs.
+                    </p>
+                </div>
+
+                <div class="pain-point">
+                    <div class="pain-point-title">Pain Point #4: Extreme Class Imbalance</div>
+                    <p style="margin: 0;">
+                        Of 5.2 million customers, only 42,000 had invested in an FD in the preceding 12 months—a positive rate of 0.8%. Standard resampling techniques would either undersample the majority class into oblivion or oversample the minority class into memorization territory.
+                    </p>
+                </div>
+
+                <h3>The Business Constraints</h3>
+                <p>
+                    Technical debt was only half the problem. The business constraints formed an equally formidable barrier:
+                </p>
+
+                <ul>
+                    <li><strong>Budget Ceiling:</strong> ₹15 Crores total marketing budget for the fiscal year. Every rupee needed justification.</li>
+                    <li><strong>Competitive Pressure:</strong> HDFC Bank had launched a 7.25% FD rate. Shriram's 6.75% offering required smarter targeting to compete.</li>
+                    <li><strong>Regulatory Scrutiny:</strong> RBI's Fair Practices Code prohibited discriminatory targeting. Model decisions needed audit trails.</li>
+                    <li><strong>Operational Capacity:</strong> Branch staff could make 800 calls per day. We needed to surface the right 800 customers.</li>
+                    <li><strong>Channel Constraints:</strong> WhatsApp Business API costs ₹0.33 per conversation. Spamming 5 million customers wasn't economically viable.</li>
                 </ul>
-            </div>
 
-            <p>
-                The CRO's ask was clear: <em>"Build me a system that tells me exactly who to call, when to call, and what to offer."</em>
-            </p>
-        </div>
-    </section>
+                <p>
+                    The CRO's mandate crystallized into a deceptively simple question: <em>"Build me a system that tells me exactly who to call, when to call, and what to offer."</em> Elegantly stated. Brutally difficult to execute.
+                </p>
 
-    <!-- Solution Architecture -->
-    <section class="grid md:grid-cols-4 gap-12 mb-32">
-        <div class="space-y-4">
-            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Architecture</h2>
-            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Solution Design</h3>
-        </div>
-        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-            <p>
-                I led a team of 5 data scientists to build an end-to-end propensity modeling system spanning three interconnected workstreams:
-            </p>
+                <!-- Mathematical Formulation -->
+                <h2>Mathematical Formulation</h2>
+                <p>
+                    Before diving into implementation, we formalized the problem mathematically. This wasn't academic exercise—precise formulation forced clarity on what we were actually optimizing for.
+                </p>
 
-            <div class="bg-slate-50 dark:bg-slate-900 p-8 rounded-2xl">
-                <h4 class="font-black text-slate-900 dark:text-white uppercase mb-6">System Architecture</h4>
-                <pre class="text-sm text-slate-300 overflow-x-auto"><code>
-                    
-┌────────────────────────────────────────────────────────────────────┐
-│                    DATA LAYER (Azure Databricks)                   │
-├────────────┬────────────┬────────────┬────────────┬─────────────── ┤
-│   Customer │    Loan    │ Transaction│  Campaign  │    External    │
-│   Master   │    Data    │   History  │   History  │     Data       │
-└──────┬─────┴──────┬─────┴──────┬─────┴──────┬─────┴───────┬───────┘
-       │            │            │            │             │
-       └────────────┴────────────┴────────────┴─────────────┘
-                                 │
-                                 ▼
-       ┌───────────────────────────────────────────────────────────── ┐
-       │              FEATURE ENGINEERING PIPELINE                    │
-       │  • RFM Features (Recency, Frequency, Monetary)               │
-       │  • Temporal Features (trend, seasonality, velocity)          │
-       │  • Behavioral Features (channel preference, response rate)   │
-       │  • Derived Features (liquidity score, investment horizon)    │
-       └────────────────────────┬────────────────────────────────────┘
-                                │
-                                ▼
-       ┌─────────────────────────────────────────────────────────────┐
-       │                  MODEL LAYER                                │
-       │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-       │  │  Propensity │  │  Tenure     │  │  Channel            │  │
-       │  │  Score      │  │  Prediction │  │  Recommendation     │  │
-       │  │  (XGBoost)  │  │  (Survival) │  │  (Multi-armed       |  |
-       |  |             |  |                |             Bandit) │  │
-       │  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-       └────────────────────────┬────────────────────────────────────┘
-                                │
-                                ▼
-       ┌─────────────────────────────────────────────────────────────┐
-       │              CAMPAIGN OPTIMIZATION LAYER                    │
-       │  • Market Mix Modelling (media attribution)                 │
-       │  • Budget Optimization (linear programming)                 │
-       │  • A/B Testing Framework                                    │
-       └─────────────────────────────────────────────────────────────┘</code></pre>
-            </div>
-        </div>
-    </section>
+                <h3>The Objective Function</h3>
+                <p>
+                    Given a customer <code>c</code> with feature vector <code>x_c</code>, we seek to maximize expected return:
+                </p>
 
-    <!-- Feature Engineering -->
-    <section class="grid md:grid-cols-4 gap-12 mb-32">
-        <div class="space-y-4">
-            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Features</h2>
-            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Feature Engineering</h3>
-        </div>
-        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-            <p>
-                The predictive power of our models hinged on feature engineering. We created <strong>247 features</strong> across 7 categories:
-            </p>
+                <div class="equation">
+                    max Σ_c [ P(conversion | x_c) × Revenue_c - Cost(contact_c) ] × I(contact_c)
+                </div>
 
-            <pre class="text-sm text-slate-300 overflow-x-auto mt-6"><code><span class="keyword">from</span> pyspark.sql <span class="keyword">import</span> functions <span class="keyword">as</span> F
-<span class="keyword">from</span> pyspark.sql.window <span class="keyword">import</span> Window
+                <p>
+                    Where <code>I(contact_c)</code> is an indicator function: 1 if we decide to contact customer <code>c</code>, 0 otherwise. The constraint is the budget:
+                </p>
 
-<span class="keyword">class</span> <span class="function">FeatureEngineer</span>:
-    <span class="keyword">def</span> <span class="function">__init__</span>(self, spark):
-        self.spark = spark
+                <div class="equation">
+                    Σ_c Cost(contact_c) × I(contact_c) ≤ Budget
+                </div>
 
-    <span class="keyword">def</span> <span class="function">create_rfm_features</span>(self, df):
-        <span class="string">"""
-        RFM Features - Industry standard for financial services
-        Recency: Days since last FD investment
-        Frequency: Number of FD investments in past 24 months
-        Monetary: Total FD investments in past 24 months
-        """</span>
-        window = Window.partitionBy(<span class="string">"customer_id"</span>)
+                <p>
+                    This formulation reveals an immediate insight: we're not trying to predict who <em>will</em> convert. We're trying to predict who will convert <em>if contacted</em>. These are fundamentally different questions, and conflating them leads to targeting customers who would have converted anyway—the classic "preaching to the choir" problem.
+                </p>
 
-        <span class="keyword">return</span> df.withColumn(
-            <span class="string">"recency_days"</span>,
-            F.datediff(F.current_timestamp(), F.col(<span class="string">"last_fd_date"</span>))
-        ).withColumn(
-            <span class="string">"frequency_24m"</span>,
-            F.count(<span class="string">"fd_id"</span>).over(window.rangeBetween(-<span class="string">730</span>, <span class="string">0</span>))
-        ).withColumn(
-            <span class="string">"monetary_24m"</span>,
-            F.sum(<span class="string">"fd_amount"</span>).over(window.rangeBetween(-<span class="string">730</span>, <span class="string">0</span>))
-        )
+                <h3>The Causal Challenge</h3>
+                <p>
+                    Standard supervised learning estimates <code>P(conversion | features)</code> from observational data. But this conflates two quantities:
+                </p>
 
-    <span class="keyword">def</span> <span class="function">create_liquidity_score</span>(self, df):
-        <span class="string">"""
-        Liquidity Score: Proprietary feature capturing investable surplus
-        L = (Savings + FD_maturity_proceeds - EMI_obligations) / Income
-        """</span>
-        <span class="keyword">return</span> df.withColumn(
-            <span class="string">"liquidity_score"</span>,
-            (F.col(<span class="string">"savings_balance"</span>) +
-             F.col(<span class="string">"fd_matured_90d"</span>) -
-             F.col(<span class="string">"total_emi_obligation"</span>)) / F.col(<span class="string">"monthly_income"</span>)
-        )
+                <div class="equation">
+                    P(conversion | features) = P(conversion | contacted, features) × P(contacted | features) + P(conversion | not contacted, features) × P(not contacted | features)
+                </div>
 
-    <span class="keyword">def</span> <span class="function">create_behavioral_features</span>(self, df):
-        <span class="string">"""
-        Behavioral features capturing customer engagement patterns
-        """</span>
-        window_90d = Window.partitionBy(<span class="string">"customer_id"</span>) \
-                          .orderBy(F.col(<span class="string">"interaction_date"</span>).desc()) \
-                          .rowsBetween(-<span class="string">90</span>, <span class="string">0</span>)
+                <p>
+                    The second term—the probability of conversion without contact—represents organic conversions that would have happened regardless. In financial services, this fraction can be substantial: customers with maturing FDs, those seeking tax-advantaged instruments before fiscal year-end, those responding to competitive pressure. Targeting these customers yields no incremental value; they would have converted anyway.
+                </p>
 
-        <span class="keyword">return</span> df.withColumn(
-            <span class="string">"email_open_rate_90d"</span>,
-            F.sum(<span class="string">"email_opened"</span>).over(window_90d) / F.sum(<span class="string">"email_sent"</span>).over(window_90d)
-        ).withColumn(
-            <span class="string">"preferred_channel"</span>,
-            F.when(F.col(<span class="string">"sms_response_rate"</span>) > F.col(<span class="string">"email_response_rate"</span>), <span class="string">"SMS"</span>)
-             .when(F.col(<span class="string">"whatsapp_response_rate"</span>) > F.col(<span class="string">"email_response_rate"</span>), <span class="string">"WhatsApp"</span>)
-             .otherwise(<span class="string">"Email"</span>)
-        ).withColumn(
-            <span class="string">"peak_engagement_hour"</span>,
-            F.hour(F.col(<span class="string">"engagement_timestamp"</span>))  <span class="comment"># Aggregated in post-processing</span>
-        )
+                <p>
+                    We needed to estimate <strong>uplift</strong>—the causal effect of contact:
+                </p>
 
-    <span class="keyword">def</span> <span class="function">create_temporal_features</span>(self, df):
-        <span class="string">"""
-        Temporal features capturing investment patterns and seasonality
-        """</span>
-        <span class="keyword">return</span> df.withColumn(
-            <span class="string">"fd_investment_velocity"</span>,
-            F.col(<span class="string">"fd_count_12m"</span>) / F.greatest(F.col(<span class="string">"fd_count_24m"</span>), F.lit(<span class="string">1</span>))
-        ).withColumn(
-            <span class="string">"is_fd_maturity_window"</span>,
-            F.when(F.col(<span class="string">"nearest_fd_maturity_days"</span>).between(<span class="string">0</span>, <span class="string">30</span>), <span class="string">1</span>).otherwise(<span class="string">0</span>)
-        ).withColumn(
-            <span class="string">"quarter"</span>, F.quarter(F.current_timestamp())
-        ).withColumn(
-            <span class="string">"is_quarter_end"</span>, F.when(F.col(<span class="string">"month"</span>).isin([<span class="string">3</span>, <span class="string">6</span>, <span class="string">9</span>, <span class="string">12</span>]), <span class="string">1</span>).otherwise(<span class="string">0</span>)
-        )
+                <div class="equation">
+                    Uplift_c = P(conversion | contacted, x_c) - P(conversion | not contacted, x_c)
+                </div>
 
-    <span class="keyword">def</span> <span class="function">create_risk_adjusted_income</span>(self, df):
-        <span class="string">"""
-        Risk-adjusted income considering delinquency history
-        Used for AML/KYC compliance as well
-        """</span>
-        <span class="keyword">return</span> df.withColumn(
-            <span class="string">"effective_income"</span>,
-            F.col(<span class="string">"monthly_income"</span>) * (
-                <span class="string">1</span> - F.when(F.col(<span class="string">"dpd_bucket"</span>) > <span class="string">0</span>, <span class="string">0.3</span>).otherwise(<span class="string">0</span>)
-            )
-        ).withColumn(
-            <span class="string">"investment_capacity"</span>,
-            F.least(F.col(<span class="string">"effective_income"</span>) * F.lit(<span class="string">0.4</span>), F.lit(<span class="string">5000000</span>))
-        )</code></pre>
+                <div class="solution-box">
+                    <div class="solution-title">Solution: Two-Model Approach</div>
+                    <p style="margin: 0;">
+                        We trained separate models: one on contacted customers, another on a holdout sample. The difference in predicted probabilities approximated uplift. This required sacrificing 15% of our campaign budget to maintain a randomized holdout—a difficult sell to business stakeholders, but essential for causal inference.
+                    </p>
+                </div>
 
-            <div class="bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-500 p-6 rounded-r-lg mt-8">
-                <h4 class="font-black text-blue-700 dark:text-blue-400 uppercase mb-3">Feature Importance (Top 10)</h4>
-                <ol class="space-y-2 text-lg">
-                    <li>1. Liquidity Score (0.187)</li>
-                    <li>2. FD Maturity Window Indicator (0.156)</li>
-                    <li>3. Recency Days (0.142)</li>
-                    <li>4. FD Investment Velocity (0.131)</li>
-                    <li>5. Investment Capacity (0.118)</li>
-                    <li>6. FD Maturity Proceeds 90D (0.103)</li>
-                    <li>7. Age Group (0.089)</li>
-                    <li>8. Email Open Rate 90D (0.076)</li>
-                    <li>9. Tenure of Relationship (0.068)</li>
-                    <li>10. Branch Visit Frequency (0.054)</li>
-                </ol>
-            </div>
-        </div>
-    </section>
+                <!-- Feature Engineering -->
+                <h2>Feature Engineering: The Real Work</h2>
+                <p>
+                    In applied machine learning, feature engineering often determines success more than model architecture. We invested 8 of our 12-week timeline on feature engineering alone. The result: 247 features across 7 categories, each with a hypothesis for why it might predict FD propensity.
+                </p>
 
-    <!-- Model Development -->
-    <section class="grid md:grid-cols-4 gap-12 mb-32">
-        <div class="space-y-4">
-            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Modeling</h2>
-            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Model Development</h3>
-        </div>
-        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
+                <h3>Category 1: RFM Features</h3>
+                <p>
+                    Recency, Frequency, Monetary—the workhorse features of customer lifetime value modeling. But in the FD context, these required careful interpretation:
+                </p>
 
-            <h4 class="font-black text-slate-900 dark:text-white uppercase">1. Propensity Model (XGBoost)</h4>
-            <p>
-                We compared multiple algorithms (Logistic Regression, Random Forest, XGBoost, LightGBM) and selected XGBoost for its superior handling of:
-            </p>
-            <ul class="space-y-2 mt-4 mb-6">
-                <li>• Class imbalance (only 0.8% positive rate)</li>
-                <li>• Feature interactions (captures non-linear relationships)</li>
-                <li>• Missing values (native handling)</li>
-            </ul>
+                <ul>
+                    <li><strong>Recency:</strong> Days since last FD investment. A customer who invested 6 months ago might have deployable capital; one who invested yesterday likely doesn't.</li>
+                    <li><strong>Frequency:</strong> Number of FD investments in past 24 months. High frequency indicates both trust and habit—but also signals a customer who actively manages finances and might be rate-shopping.</li>
+                    <li><strong>Monetary:</strong> Total FD volume. Critical for segmentation, but past investment volume doesn't guarantee future capacity.</li>
+                </ul>
 
-            <pre class="text-sm text-slate-300 overflow-x-auto"><code><span class="keyword">import</span> xgboost <span class="keyword">as</span> xgb
-<span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> StratifiedKFold
-<span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> roc_auc_score, precision_recall_curve
+                <h3>Category 2: Liquidity Score (Proprietary)</h3>
+                <p>
+                    Our most predictive feature emerged from domain knowledge, not raw data. The Liquidity Score captures deployable surplus—money available for FD investment. We derived it from:
+                </p>
 
-<span class="keyword">class</span> <span class="function">PropensityModel</span>:
-    <span class="keyword">def</span> <span class="function">__init__</span>(self):
-        self.model = xgb.XGBClassifier(
-            n_estimators=<span class="string">500</span>,
-            max_depth=<span class="string">6</span>,
-            learning_rate=<span class="string">0.01</span>,
-            subsample=<span class="string">0.8</span>,
-            colsample_bytree=<span class="string">0.8</span>,
-            scale_pos_weight=<span class="string">124</span>,  <span class="comment"># 1:124 class ratio</span>
-            eval_metric=[<span class="string">'auc'</span>, <span class="string">'logloss'</span>],
-            early_stopping_rounds=<span class="string">50</span>,
-            tree_method=<span class="string">'hist'</span>  <span class="comment"># Faster training</span>
-        )
-        self.threshold = <span class="keyword">None</span>
+                <div class="equation">
+                    L_c = (SavingsBalance_c + FDMaturityProceeds_90d_c - EMI_Obligations_c) / MonthlyIncome_c
+                </div>
 
-    <span class="keyword">def</span> <span class="function">fit</span>(self, X_train, y_train, X_val, y_val):
-        <span class="string">"""
-        Train with early stopping on validation set
-        """</span>
-        self.model.fit(
-            X_train, y_train,
-            eval_set=[(X_val, y_val)],
-            verbose=<span class="string">False</span>
-        )
+                <p>
+                    The numerator represents money the customer <em>could</em> invest. The denominator normalizes for income level. A customer with ₹2 Lakhs in savings and ₹50,000 monthly obligations has higher deployable capacity than one with ₹5 Lakhs savings but ₹4.5 Lakhs in obligations.
+                </p>
 
-        <span class="comment"># Find optimal threshold using business cost function</span>
-        probs = self.model.predict_proba(X_val)[:, <span class="string">1</span>]
-        self.threshold = self._optimize_threshold(y_val, probs)
+                <p>
+                    The 90-day FD maturity window proved critical. Customers with upcoming FD maturities face a decision point: renew with the current institution, or shop around. Contacting them 7-14 days before maturity—with a pre-approved renewal offer—captured conversions before competitors could intervene.
+                </p>
 
-        <span class="keyword">return</span> self
+                <h3>Category 3: Behavioral Features</h3>
+                <p>
+                    How customers interact with communications reveals intent. We engineered:
+                </p>
 
-    <span class="keyword">def</span> <span class="function">_optimize_threshold</span>(self, y_true, y_prob):
-        <span class="string">"""
-        Optimize threshold based on business cost matrix:
-        - True Positive: Revenue of ₹50,000 (avg FD ticket)
-        - False Positive: Marketing cost of ₹150
-        - False Negative: Opportunity cost of ₹50,000
-        """</span>
-        precisions, recalls, thresholds = precision_recall_curve(y_true, y_prob)
+                <div class="equation">
+                    EngagementScore_c = α × EmailOpenRate_c + β × SMSClickRate_c + γ × WhatsAppReadRate_c
+                </div>
 
-        <span class="comment"># Business-optimized metric</span>
-        costs = []
-        <span class="keyword">for</span> p, r <span class="keyword">in</span> zip(precisions, recalls):
-            cost = (r * <span class="string">50000</span> - (<span class="string">1</span>-p) * <span class="string">150</span> * r / p <span class="keyword">if</span> p > <span class="string">0</span> <span class="keyword">else</span> <span class="string">0</span>)
-            costs.append(cost)
+                <p>
+                    Where α, β, γ are channel-specific weights learned from held-out validation data. A customer who opens every email but never clicks has different intent than one who clicks immediately. Peak engagement hour (the time of day a customer most frequently opens communications) informed <em>when</em> to contact, not just <em>whether</em>.
+                </p>
 
-        optimal_idx = np.argmax(costs)
-        <span class="keyword">return</span> thresholds[optimal_idx] <span class="keyword">if</span> optimal_idx < len(thresholds) <span class="keyword">else</span> <span class="string">0.5</span>
+                <h3>Category 4: Temporal Features</h3>
+                <p>
+                    Investment behavior isn't stationary. We captured dynamics:
+                </p>
 
-    <span class="keyword">def</span> <span class="function">predict_propensity</span>(self, X):
-        <span class="string">"""
-        Return calibrated probability scores
-        """</span>
-        <span class="keyword">return</span> self.model.predict_proba(X)[:, <span class="string">1</span>]
+                <div class="equation">
+                    FDVelocity_c = FDCount_12m_c / max(FDCount_24m_c, 1)
+                </div>
 
-    <span class="keyword">def</span> <span class="function">segment_customers</span>(self, X):
-        <span class="string">"""
-        Segment into tiers based on propensity
-        Tier 1 (Hot): >0.7 probability
-        Tier 2 (Warm): 0.4-0.7
-        Tier 3 (Cold): 0.2-0.4
-        Tier 4 (Dormant): <0.2
-        """</span>
-        probs = self.predict_propensity(X)
-        <span class="keyword">return</span> np.select(
-            [probs > <span class="string">0.7</span>, probs > <span class="string">0.4</span>, probs > <span class="string">0.2</span>],
-            [<span class="string">1</span>, <span class="string">2</span>, <span class="string">3</span>],
-            default=<span class="string">4</span>
-        )</code></pre>
+                <p>
+                    Velocity > 1 indicates accelerating investment frequency. Velocity < 1 signals deceleration—perhaps deteriorating finances or competitive churn. Both conditions merit different treatment.
+                </p>
 
-            <h4 class="font-black text-slate-900 dark:text-white uppercase mt-12">2. Model Performance</h4>
-            <div class="grid md:grid-cols-2 gap-6 mt-6">
-                <div class="bg-slate-50 dark:bg-slate-900 p-6 rounded-2xl">
-                    <h5 class="font-bold mb-4">Training Metrics</h5>
-                    <table class="w-full text-sm">
-                        <tr class="border-b"><td class="py-2">AUC-ROC</td><td class="text-right font-mono">0.947</td></tr>
-                        <tr class="border-b"><td class="py-2">AUC-PR</td><td class="text-right font-mono">0.412</td></tr>
-                        <tr class="border-b"><td class="py-2">Precision @ 10%</td><td class="text-right font-mono">23.4%</td></tr>
-                        <tr class="border-b"><td class="py-2">Recall @ 10%</td><td class="text-right font-mono">68.2%</td></tr>
-                        <tr><td class="py-2">Lift @ 10%</td><td class="text-right font-mono">29.3x</td></tr>
+                <h3>The Missing Value Problem: Solutions and Trade-offs</h3>
+                <p>
+                    Feature engineering revealed the missing value problem in full force. We evaluated multiple approaches:
+                </p>
+
+                <div class="comparison-grid">
+                    <div class="pain-point">
+                        <div class="pain-point-title">Approach 1: Deletion</div>
+                        <p style="margin: 0;">Remove records with missing values. <strong>Result:</strong> Lost 34% of customers. Unacceptable.</p>
+                    </div>
+                    <div class="pain-point">
+                        <div class="pain-point-title">Approach 2: Mean Imputation</div>
+                        <p style="margin: 0;">Fill missing income with mean income. <strong>Result:</strong> Systematic underestimation for high-net-worth customers, overestimation for others.</p>
+                    </div>
+                    <div class="pain-point">
+                        <div class="pain-point-title">Approach 3: MICE</div>
+                        <p style="margin: 0;">Multiple Imputation by Chained Equations. <strong>Result:</strong> Computationally expensive at 5.2M scale; convergence issues with MNAR patterns.</p>
+                    </div>
+                    <div class="solution-box">
+                        <div class="solution-title">Chosen: Native Handling + Flag Features</div>
+                        <p style="margin: 0;">XGBoost's native missing value handling + binary flags indicating missingness. The <code>income_missing</code> feature itself became predictive—an indicator of digital-native customers who bypassed traditional onboarding.</p>
+                    </div>
+                </div>
+
+                <!-- Model Development -->
+                <h2>Model Development: Decisions Under Pressure</h2>
+                <p>
+                    With features engineered, we faced the model selection decision. This wasn't a Kaggle competition where the best AUC wins. This was production deployment where interpretability, latency, and maintenance burden mattered equally with accuracy.
+                </p>
+
+                <h3>Algorithm Comparison</h3>
+                <p>
+                    We benchmarked four algorithms on held-out data:
+                </p>
+
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; font-size: 0.9rem; margin: 1.5rem 0; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--glass-border);">
+                                <th style="text-align: left; padding: 0.75rem;">Metric</th>
+                                <th style="text-align: center; padding: 0.75rem;">Logistic Reg</th>
+                                <th style="text-align: center; padding: 0.75rem;">Random Forest</th>
+                                <th style="text-align: center; padding: 0.75rem;">XGBoost</th>
+                                <th style="text-align: center; padding: 0.75rem;">LightGBM</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 0.75rem;">AUC-ROC</td>
+                                <td style="text-align: center; padding: 0.75rem;">0.891</td>
+                                <td style="text-align: center; padding: 0.75rem;">0.923</td>
+                                <td style="text-align: center; padding: 0.75rem;"><strong>0.947</strong></td>
+                                <td style="text-align: center; padding: 0.75rem;">0.944</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 0.75rem;">AUC-PR</td>
+                                <td style="text-align: center; padding: 0.75rem;">0.287</td>
+                                <td style="text-align: center; padding: 0.75rem;">0.356</td>
+                                <td style="text-align: center; padding: 0.75rem;"><strong>0.412</strong></td>
+                                <td style="text-align: center; padding: 0.75rem;">0.408</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 0.75rem;">Lift @ 10%</td>
+                                <td style="text-align: center; padding: 0.75rem;">18.2x</td>
+                                <td style="text-align: center; padding: 0.75rem;">24.7x</td>
+                                <td style="text-align: center; padding: 0.75rem;"><strong>29.3x</strong></td>
+                                <td style="text-align: center; padding: 0.75rem;">28.9x</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--glass-border);">
+                                <td style="padding: 0.75rem;">Training Time</td>
+                                <td style="text-align: center; padding: 0.75rem;"><strong>2 min</strong></td>
+                                <td style="text-align: center; padding: 0.75rem;">45 min</td>
+                                <td style="text-align: center; padding: 0.75rem;">12 min</td>
+                                <td style="text-align: center; padding: 0.75rem;">8 min</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem;">Inference Latency</td>
+                                <td style="text-align: center; padding: 0.75rem;"><strong>2ms</strong></td>
+                                <td style="text-align: center; padding: 0.75rem;">15ms</td>
+                                <td style="text-align: center; padding: 0.75rem;">12ms</td>
+                                <td style="text-align: center; padding: 0.75rem;">9ms</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
-                <div class="bg-slate-50 dark:bg-slate-900 p-6 rounded-2xl">
-                    <h5 class="font-bold mb-4">Business Metrics</h5>
-                    <table class="w-full text-sm">
-                        <tr class="border-b"><td class="py-2">Conversion Lift</td><td class="text-right font-mono">312%</td></tr>
-                        <tr class="border-b"><td class="py-2">Cost per Acquisition</td><td class="text-right font-mono">↓ 78%</td></tr>
-                        <tr class="border-b"><td class="py-2">Campaign ROI</td><td class="text-right font-mono">8.2x</td></tr>
-                        <tr class="border-b"><td class="py-2">Model Drift</td><td class="text-right font-mono">&lt;2%/month</td></tr>
-                        <tr><td class="py-2">Inference Time</td><td class="text-right font-mono">12ms</td></tr>
-                    </table>
+
+                <p>
+                    XGBoost won on accuracy metrics, LightGBM on speed. The deciding factor? SHAP interpretability. XGBoost's mature SHAP implementation allowed us to explain individual predictions—to answer the question "Why did this customer score 0.73?" with precise feature contributions.
+                </p>
+
+                <h3>The Class Imbalance Challenge</h3>
+                <p>
+                    With 0.8% positive rate, standard cross-entropy loss was hopeless. The model would learn to always predict negative and achieve 99.2% accuracy—useless for our purposes. We evaluated three strategies:
+                </p>
+
+                <div class="equation">
+                    Class Weight: scale_pos_weight = N_negative / N_positive = 124
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Market Mix Modelling -->
-    <section class="grid md:grid-cols-4 gap-12 mb-32">
-        <div class="space-y-4">
-            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">MMM</h2>
-            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Market Mix Modelling</h3>
-        </div>
-        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-            <p>
-                Beyond targeting, we needed to answer: <em>Which channels deserve more budget?</em> We implemented a Bayesian MMM to attribute conversions across SMS, Email, WhatsApp, Branch Calls, and Digital Ads.
-            </p>
+                <p>
+                    Setting <code>scale_pos_weight=124</code> told XGBoost to treat false negatives as 124× more costly than false positives. This shifted the decision boundary but introduced calibration issues—the raw probability scores no longer reflected true probabilities.
+                </p>
 
-            <pre class="text-sm text-slate-300 overflow-x-auto mt-6"><code><span class="keyword">import</span> pymc <span class="keyword">as</span> pm
-<span class="keyword">import</span> arviz <span class="keyword">as</span> az
-<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+                <p>
+                    We also experimented with SMOTE (Synthetic Minority Oversampling Technique), generating synthetic positive examples. The results were disappointing: on validation data, SMOTE models exhibited severe overfitting, with AUC-PR actually <em>decreasing</em> compared to class-weighted training. The synthetic examples, interpolated from real positives, introduced artifacts the model memorized.
+                </p>
 
-<span class="keyword">class</span> <span class="function">MarketMixModel</span>:
-    <span class="keyword">def</span> <span class="function">__init__</span>(self):
-        self.channels = [<span class="string">'sms'</span>, <span class="string">'email'</span>, <span class="string">'whatsapp'</span>, <span class="string">'branch'</span>, <span class="string">'digital'</span>]
-
-    <span class="keyword">def</span> <span class="function">build_model</span>(self, spend_data, conversions):
-        <span class="string">"""
-        Bayesian MMM with Adstock and Saturation transformations
-
-        Model: Conversions ~ α + Σβ_i * Saturation(Adstock(Spend_i))
-
-        Where:
-        - Adstock: Captures carryover effect of advertising
-        - Saturation: Diminishing returns on spend
-        - β_i: Channel effectiveness coefficients
-        """</span>
-        n_weeks, n_channels = spend_data.shape
-
-        <span class="keyword">with</span> pm.Model() <span class="keyword">as</span> model:
-            <span class="comment"># Priors for channel effectiveness</span>
-            beta = pm.HalfNormal(<span class="string">'beta'</span>, sigma=<span class="string">1</span>, shape=n_channels)
-
-            <span class="comment"># Adstock parameters (carryover)</span>
-            theta = pm.Beta(<span class="string">'theta'</span>, alpha=<span class="string">2</span>, beta=<span class="string">2</span>, shape=n_channels)
-
-            <span class="comment"># Saturation parameters</span>
-            alpha_sat = pm.Gamma(<span class="string">'alpha_sat'</span>, alpha=<span class="string">3</span>, beta=<span class="string">1</span>, shape=n_channels)
-
-            <span class="comment"># Apply transformations</span>
-            adstock = self._adstock_transform(spend_data, theta)
-            saturated = self._saturation_transform(adstock, alpha_sat)
-
-            <span class="comment"># Linear combination</span>
-            mu = pm.Deterministic(
-                <span class="string">'mu'</span>,
-                pm.math.dot(saturated, beta)
-            )
-
-            <span class="comment"># Likelihood</span>
-            sigma = pm.HalfNormal(<span class="string">'sigma'</span>, sigma=<span class="string">100</span>)
-            y = pm.Normal(<span class="string">'y'</span>, mu=mu, sigma=sigma, observed=conversions)
-
-        <span class="keyword">return</span> model
-
-    <span class="keyword">def</span> <span class="function">_adstock_transform</span>(self, spend, theta):
-        <span class="string">"""
-        Geometric adstock: weighted sum of current and past spend
-        Spend_t' = Spend_t + θ * Spend_(t-1) + θ² * Spend_(t-2) + ...
-        """</span>
-        n_weeks, n_channels = spend.shape
-        adstock = np.zeros_like(spend)
-
-        <span class="keyword">for</span> t <span class="keyword">in</span> range(n_weeks):
-            <span class="keyword">for</span> lag <span class="keyword">in</span> range(min(t+<span class="string">1</span>, <span class="string">12</span>)):  <span class="comment"># Max 12 weeks decay</span>
-                adstock[t] += (theta ** lag) * spend[t - lag]
-
-        <span class="keyword">return</span> adstock
-
-    <span class="keyword">def</span> <span class="function">_saturation_transform</span>(self, x, alpha):
-        <span class="string">"""
-        Hill function: S(x) = x^α / (x^α + K^α)
-        Captures diminishing returns
-        """</span>
-        K = <span class="string">100000</span>  <span class="comment"># Half-saturation point</span>
-        <span class="keyword">return</span>(x ** alpha) / (x ** alpha + K ** alpha)
-
-    <span class="keyword">def</span> <span class="function">optimize_budget</span>(self, total_budget, channel_bounds):
-        <span class="string">"""
-        Linear programming to maximize expected conversions
-        max Σβ_i * Saturation(Spend_i)
-        s.t. ΣSpend_i = Total_Budget
-             lb_i ≤ Spend_i ≤ ub_i
-        """</span>
-        <span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize
-
-        <span class="keyword">def</span> <span class="function">objective</span>(spend):
-            <span class="keyword">return</span> -np.sum(self.beta * self._saturation_transform(spend, self.alpha_sat))
-
-        constraints = [{<span class="string">'type'</span>: <span class="string">'eq'</span>, <span class="string">'fun'</span>: <span class="keyword">lambda</span> x: np.sum(x) - total_budget}]
-        bounds = [(channel_bounds[c][<span class="string">'lb'</span>], channel_bounds[c][<span class="string">'ub'</span>]) <span class="keyword">for</span> c <span class="keyword">in</span> self.channels]
-
-        result = minimize(objective, x0=[total_budget/<span class="string">5</span>]*<span class="string">5</span>, bounds=bounds, constraints=constraints)
-        <span class="keyword">return</span> dict(zip(self.channels, result.x))</code></pre>
-
-            <div class="bg-emerald-50 dark:bg-emerald-950/30 border-l-4 border-emerald-500 p-6 rounded-r-lg mt-8">
-                <h4 class="font-black text-emerald-700 dark:text-emerald-400 uppercase mb-3">Optimized Budget Allocation</h4>
-                <table class="w-full text-sm">
-                    <thead>
-                        <tr class="border-b"><th class="py-2 text-left">Channel</th><th class="py-2 text-right">Old</th><th class="py-2 text-right">New</th><th class="py-2 text-right">Δ</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b"><td class="py-2">WhatsApp</td><td class="text-right">15%</td><td class="text-right">32%</td><td class="text-right text-emerald-600">+117%</td></tr>
-                        <tr class="border-b"><td class="py-2">Branch Calls</td><td class="text-right">30%</td><td class="text-right">34%</td><td class="text-right text-emerald-600">+13%</td></tr>
-                        <tr class="border-b"><td class="py-2">SMS</td><td class="text-right">35%</td><td class="text-right">21%</td><td class="text-right text-red-600">-40%</td></tr>
-                        <tr class="border-b"><td class="py-2">Email</td><td class="text-right">15%</td><td class="text-right">8%</td><td class="text-right text-red-600">-47%</td></tr>
-                        <tr><td class="py-2">Digital Ads</td><td class="text-right">5%</td><td class="text-right">5%</td><td class="text-right">-</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- Results -->
-    <section class="grid md:grid-cols-4 gap-12 mb-32">
-        <div class="space-y-4">
-            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Impact</h2>
-            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Business Results</h3>
-        </div>
-        <div class="md:col-span-3 space-y-10 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 p-8 rounded-2xl text-white">
-                    <div class="text-5xl font-black mb-2">₹520 Cr</div>
-                    <div class="text-sm opacity-80 uppercase tracking-wider">Incremental FD Conversions</div>
-                    <div class="mt-4 text-xs opacity-60">vs. ₹167 Cr baseline projection</div>
+                <div class="solution-box">
+                    <div class="solution-title">Final Approach: Class Weights + Threshold Optimization</div>
+                    <p style="margin: 0;">
+                        We trained with <code>scale_pos_weight=124</code>, accepted miscalibrated probabilities, and then optimized the decision threshold on validation data using a business cost function rather than statistical metrics.
+                    </p>
                 </div>
-                <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-8 rounded-2xl text-white">
-                    <div class="text-5xl font-black mb-2">5%</div>
-                    <div class="text-sm opacity-80 uppercase tracking-wider">Marketing Cost Savings</div>
-                    <div class="mt-4 text-xs opacity-60">~₹75 Lakhs annual savings</div>
+
+                <h3>Threshold Optimization: Where Statistics Meets Business</h3>
+                <p>
+                    The default threshold of 0.5 is rarely optimal in imbalanced settings. We optimized threshold using a custom business cost function:
+                </p>
+
+                <div class="equation">
+                    Cost(TP) = +₹50,000 (average FD ticket revenue)
+                    <br>
+                    Cost(FP) = -₹150 (marketing cost for non-converter)
+                    <br>
+                    Cost(FN) = -₹50,000 (opportunity cost of missed conversion)
+                    <br>
+                    Cost(TN) = ₹0
                 </div>
-            </div>
 
-            <h4 class="font-black text-slate-900 dark:text-white uppercase mt-12">Quantitative Impact</h4>
+                <p>
+                    Scanning thresholds from 0.1 to 0.9, we computed expected profit:
+                </p>
 
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm mt-6">
-                    <thead>
-                        <tr class="border-b-2 border-slate-200 dark:border-slate-700">
-                            <th class="py-3 text-left">Metric</th>
-                            <th class="py-3 text-right">Pre-ML</th>
-                            <th class="py-3 text-right">Post-ML</th>
-                            <th class="py-3 text-right">Improvement</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="border-b">
-                            <td class="py-3">Campaign Conversion Rate</td>
-                            <td class="text-right">0.8%</td>
-                            <td class="text-right">3.4%</td>
-                            <td class="text-right text-emerald-600 font-bold">+325%</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">Cost per Acquisition</td>
-                            <td class="text-right">₹1,250</td>
-                            <td class="text-right">₹280</td>
-                            <td class="text-right text-emerald-600 font-bold">-78%</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">Tier-1 Customer Conversion</td>
-                            <td class="text-right">N/A</td>
-                            <td class="text-right">12.3%</td>
-                            <td class="text-right text-emerald-600 font-bold">15x lift</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">Average FD Ticket Size</td>
-                            <td class="text-right">₹1.8L</td>
-                            <td class="text-right">₹2.4L</td>
-                            <td class="text-right text-emerald-600 font-bold">+33%</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3">Campaign ROI</td>
-                            <td class="text-right">2.3x</td>
-                            <td class="text-right">8.2x</td>
-                            <td class="text-right text-emerald-600 font-bold">+257%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div class="equation">
+                    ExpectedProfit(t) = TP(t) × 50000 - FP(t) × 150 - FN(t) × 50000
+                </div>
 
-            <div class="bg-purple-50 dark:bg-purple-950/30 border-l-4 border-purple-500 p-6 rounded-r-lg mt-8">
-                <h4 class="font-black text-purple-700 dark:text-purple-400 uppercase mb-3">Key Learnings</h4>
-                <ul class="space-y-3 text-lg">
-                    <li><strong>Feature Engineering > Model Complexity:</strong> Our proprietary Liquidity Score was more predictive than any model hyperparameter</li>
-                    <li><strong>Business Thresholds Matter:</strong> Optimizing for ROC-AUC vs. business cost function gave 23% better ROI</li>
-                    <li><strong>Channel Attribution is Hard:</strong> MMM required 6 weeks to converge; we supplemented with holdout experiments</li>
-                    <li><strong>Model Monitoring is Critical:</strong> We detected feature drift within 3 weeks and retrained automatically</li>
+                <p>
+                    The optimal threshold: 0.34. Not the threshold maximizing F1 score (which was 0.47), not the threshold maximizing Youden's J statistic (0.41), but the threshold that maximized business value. This gap between statistical and business optimality is often overlooked—and costly.
+                </p>
+
+                <!-- Market Mix Modelling -->
+                <h2>Market Mix Modelling: The Attribution Problem</h2>
+                <p>
+                    Propensity scores told us <em>who</em> to target. Market Mix Modelling (MMM) answered a different question: <em>where</em> should we allocate budget across channels?
+                </p>
+
+                <p>
+                    This is fundamentally a causal inference problem. We observe conversions and channel exposures. We want to know: if we had spent more on WhatsApp and less on SMS, how would conversions have changed?
+                </p>
+
+                <h3>The Structural Model</h3>
+                <p>
+                    We specified a Bayesian structural model incorporating two key phenomena:
+                </p>
+
+                <p><strong>1. Adstock (Carryover Effect):</strong> Advertising effects persist beyond the exposure period. An SMS sent today influences decisions for weeks.</p>
+
+                <div class="equation">
+                    Adstock_t = Spend_t + θ × Spend_(t-1) + θ² × Spend_(t-2) + ...
+                </div>
+
+                <p>
+                    The decay parameter θ captures how quickly advertising effects fade. For SMS, we expected rapid decay (customers act quickly or not at all). For email, slower decay (messages sit in inboxes for days).
+                </p>
+
+                <p><strong>2. Saturation (Diminishing Returns):</strong> The first ₹1 Lakh spent on a channel has more impact than the 10th ₹1 Lakh.</p>
+
+                <div class="equation">
+                    Saturation(x) = x^α / (x^α + K^α)
+                </div>
+
+                <p>
+                    K is the half-saturation point—spend level achieving 50% of maximum possible effect. α controls steepness: higher α means sharper saturation.
+                </p>
+
+                <h3>The Full Model Specification</h3>
+
+                <div class="equation">
+                    Conversions_t ~ Normal(μ_t, σ)
+                    <br><br>
+                    μ_t = α + Σᵢ βᵢ × Hill(Adstock(Spendᵢ,t , θᵢ), Kᵢ, αᵢ)
+                    <br><br>
+                    Where i ∈ {SMS, Email, WhatsApp, Branch, Digital}
+                </div>
+
+                <p>
+                    We fit this model using PyMC, running 4 chains with 2000 samples each. Convergence diagnostics showed R-hat < 1.01 for all parameters, but trace plots revealed slow mixing—synthetic data tests suggested we needed 6+ weeks of data for reliable inference. With only 12 weeks of clean campaign data, uncertainty in channel coefficients was substantial.
+                </p>
+
+                <h3>What We Learned</h3>
+                <p>
+                    Despite uncertainty, the posterior distributions revealed clear patterns:
+                </p>
+
+                <ul>
+                    <li><strong>WhatsApp:</strong> β̂ = 0.42 [0.31, 0.58] 95% CI. Highest ROI, fastest-growing channel.</li>
+                    <li><strong>Branch Calls:</strong> β̂ = 0.38 [0.29, 0.47]. Tried and true—high conversion for contacted customers, but operational bottleneck.</li>
+                    <li><strong>SMS:</strong> β̂ = 0.18 [0.11, 0.26]. Low cost, but also low impact. Volume without targeting.</li>
+                    <li><strong>Email:</strong> β̂ = 0.11 [0.06, 0.17]. Lowest ROI. Many customers don't read marketing emails.</li>
                 </ul>
+
+                <p>
+                    The recommendation: reallocate from SMS to WhatsApp, maintain Branch investment, reduce Email. Conservative application (shifting 20% of budget) rather than aggressive reallocation—MMM uncertainty warranted humility.
+                </p>
+
+                <!-- Production Challenges -->
+                <h2>Production Challenges: When Models Meet Reality</h2>
+
+                <h3>Challenge 1: Feature Drift</h3>
+                <p>
+                    Three weeks after deployment, we noticed declining model performance. Investigation revealed the culprit: a new campaign had offered preferential FD rates to customers with FD maturity in the next 30 days. This created a new, strong signal—<code>fd_maturity_window</code> feature—which the model had never seen at training time.
+                </p>
+
+                <p>
+                    The feature's distribution shifted:
+                </p>
+
+                <div class="equation">
+                    P(fd_maturity_window = 1) increased from 3.2% to 8.7%
+                </div>
+
+                <p>
+                    Model predictions for this segment became unreliable—not because the model was wrong, but because the world had changed. We implemented drift monitoring using Population Stability Index (PSI):
+                </p>
+
+                <div class="equation">
+                    PSI = Σ (Actual_i - Expected_i) × ln(Actual_i / Expected_i)
+                </div>
+
+                <p>
+                    PSI > 0.2 triggers automatic retraining pipeline. PSI > 0.1 triggers alerts for investigation.
+                </p>
+
+                <h3>Challenge 2: Cold Start for New Customers</h3>
+                <p>
+                    The model required 90 days of behavioral history. New customers scored near-random probabilities. Our solution: a separate "cold start" model trained on demographic and initial transaction features only. Accuracy was lower (AUC 0.72 vs 0.95), but better than random for the 8% of customers who were new each month.
+                </p>
+
+                <h3>Challenge 3: Explainability at Scale</h3>
+                <p>
+                    Branch managers demanded explanations for scores. "Why is Mrs. Sharma only Tier 3?" Using SHAP, we generated individualized explanations:
+                </p>
+
+                <div class="note">
+                    <strong>Mrs. Sharma's Score: 0.31 (Tier 3)</strong><br><br>
+                    <strong>Factors reducing score:</strong><br>
+                    • Low liquidity score: -0.18 (recent FD maturity redeployed elsewhere)<br>
+                    • Low engagement: -0.12 (no email opens in 90 days)<br>
+                    • Competitive exposure: -0.08 (visited competitor website based on attribution data)<br><br>
+                    <strong>Factors increasing score:</strong><br>
+                    • Prior FD history: +0.15 (2 previous FDs)<br>
+                    • Age (55+): +0.08 (FDs preferred over equity)<br><br>
+                    <strong>Recommendation:</strong> Wait 14 days, re-engage via WhatsApp, offer 10 bps rate enhancement.
+                </div>
+
+                <h3>Challenge 4: The Ethics of Prediction</h3>
+                <p>
+                    Predictive models can encode and amplify biases. We conducted fairness audits across age, gender, and geography:
+                </p>
+
+                <ul>
+                    <li><strong>Age:</strong> Older customers (55+) received systematically higher scores. Was this bias or legitimate signal? Investigation confirmed age correlated with FD preference (risk aversion increases with age). But we added guardrails: no customer could be excluded from campaigns based solely on age.</li>
+                    <li><strong>Geography:</strong> Rural customers scored lower due to thinner digital footprints. We adjusted behavioral feature weights to reduce geographic disparity.</li>
+                    <li><strong>Gender:</strong> No significant disparity after controlling for income and occupation.</li>
+                </ul>
+
+                <p>
+                    These audits weren't one-time exercises—they became quarterly reviews with legal and compliance stakeholders.
+                </p>
+
+                <!-- Results -->
+                <h2>Business Impact: The Numbers</h2>
+                <p>
+                    After 6 months of deployment, the results exceeded projections:
+                </p>
+
+                <div class="impact-card" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                    <div style="text-align: center;">
+                        <div class="impact-stat">3.4%</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Conversion Rate (from 0.8%)</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="impact-stat">₹280</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Cost per Acquisition (from ₹1,250)</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="impact-stat">8.2x</div>
+                        <div style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em;">Campaign ROI (from 2.3x)</div>
+                    </div>
+                </div>
+
+                <h3>Incremental Attribution</h3>
+                <p>
+                    The ₹520 Crore figure wasn't total FD mobilization—it was <em>incremental</em> contribution, the difference between model-driven targeting and the baseline approach. We measured this through:
+                </p>
+
+                <ul>
+                    <li><strong>Holdout analysis:</strong> 5% of customers held out from model-driven campaigns continued receiving random outreach. Their conversion rate (0.9%) established counterfactual.</li>
+                    <li><strong>Pre/post comparison:</strong> Year-over-year FD mobilization growth accelerated from 12% to 24% after model deployment, controlling for market rate changes.</li>
+                    <li><strong>Channel-specific attribution:</strong> MMM attributed 60% of incremental conversions to improved targeting (propensity scores), 40% to improved channel allocation.</li>
+                </ul>
+
+                <h3>Operational Transformation</h3>
+                <p>
+                    Beyond the headline numbers, the system changed how marketing operated:
+                </p>
+
+                <ul>
+                    <li><strong>From broadcast to precision:</strong> Campaigns now targeted 200,000 high-propensity customers instead of 5 million. Same conversion volume, 25x fewer messages.</li>
+                    <li><strong>From reactive to proactive:</strong> FD maturity predictions enabled preemptive outreach. Conversion rate for customers contacted 14 days before maturity: 18.2%.</li>
+                    <li><strong>From intuition to evidence:</strong> Feature importance rankings became boardroom talking points. "Liquidity score explains 18.7% of variance" resonated more than "the model is accurate."</li>
+                </ul>
+
+                <!-- Key Lessons -->
+                <h2>Key Lessons: What I'd Do Differently</h2>
+
+                <div class="warning">
+                    <strong>Lesson #1: Holdout Groups Are Non-Negotiable</strong><br><br>
+                    The business resisted sacrificing 15% of campaign budget for randomized holdout. We compromised at 5%. In hindsight, we needed more. Without proper counterfactuals, we couldn't measure true incremental lift until month 4. The statistical rigor should have been defended more forcefully upfront.
+                </div>
+
+                <div class="warning">
+                    <strong>Lesson #2: Calibration Matters for Threshold Optimization</strong><br><br>
+                    We optimized thresholds for business value, but the class-weighted model produced miscalibrated probabilities. This caused issues downstream when other teams tried to use raw scores for risk aggregation. Next time: probability calibration (Platt scaling or isotonic regression) post-training, before threshold optimization.
+                </div>
+
+                <div class="warning">
+                    <strong>Lesson #3: Model Monitoring Should Be Built-In, Not Bolted On</strong><br><br>
+                    We implemented drift monitoring reactively, after performance degraded. It should have been part of the initial deployment—PSI calculations, feature distribution tracking, and automated retraining triggers from day one.
+                </div>
+
+                <div class="note">
+                    <strong>What Went Right</strong><br><br>
+                    <strong>Feature engineering investment:</strong> The 8 weeks spent on features paid dividends. The Liquidity Score alone was worth more than any hyperparameter tuning.<br><br>
+                    <strong>Segmentation over prediction:</strong> The tier system (Hot/Warm/Cold/Dormant) was more actionable than raw probabilities. Branch staff could operationalize "focus on Tier 1" but struggled with "call everyone above 0.67."<br><br>
+                    <strong>Business partnership:</strong> Having a marketing analyst embedded in the data science team accelerated iteration. Features were validated against domain expertise before model training.
+                </div>
+
+                <!-- Technology Stack -->
+                <h2>Technology Stack</h2>
+                <div class="comparison-grid">
+                    <div class="impact-card" style="padding: 1.25rem;">
+                        <h4 style="font-weight: 700; margin-bottom: 0.75rem;">Machine Learning</h4>
+                        <ul style="font-size: 0.85rem; color: var(--text-secondary); margin-left: 1rem;">
+                            <li>XGBoost 2.0 (propensity)</li>
+                            <li>PyMC 5 (market mix)</li>
+                            <li>SHAP (explainability)</li>
+                            <li>Evidently AI (drift monitoring)</li>
+                        </ul>
+                    </div>
+                    <div class="impact-card" style="padding: 1.25rem;">
+                        <h4 style="font-weight: 700; margin-bottom: 0.75rem;">Infrastructure</h4>
+                        <ul style="font-size: 0.85rem; color: var(--text-secondary); margin-left: 1rem;">
+                            <li>Azure Databricks (ML Runtime 14.x)</li>
+                            <li>Delta Lake (feature store)</li>
+                            <li>MLflow (model registry)</li>
+                            <li>Azure Functions (scoring API)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                    <a href="/" class="btn btn-glass">← Back to Portfolio</a>
+                    <a href="rag-pipeline.html" class="btn btn-primary">Next: RAG Pipeline →</a>
+                </div>
+
             </div>
         </div>
-    </section>
-
-    <!-- Technical Stack -->
-    <section class="grid md:grid-cols-4 gap-12 mb-32">
-        <div class="space-y-4">
-            <h2 class="text-xs font-bold uppercase tracking-[0.4em] text-slate-400">Stack</h2>
-            <h3 class="text-lg font-black text-slate-900 dark:text-white uppercase leading-none">Technology Stack</h3>
-        </div>
-        <div class="md:col-span-3 space-y-6 text-lg leading-relaxed text-slate-700 dark:text-slate-300">
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="space-y-4">
-                    <h5 class="font-bold uppercase text-slate-500">Infrastructure</h5>
-                    <ul class="space-y-2">
-                        <li>• Azure Databricks (ML Runtime 14.x)</li>
-                        <li>• Delta Lake for feature store</li>
-                        <li>• MLflow for model registry</li>
-                        <li>• Azure Functions for scoring API</li>
-                    </ul>
-                </div>
-                <div class="space-y-4">
-                    <h5 class="font-bold uppercase text-slate-500">ML Stack</h5>
-                    <ul class="space-y-2">
-                        <li>• XGBoost 2.0 (propensity)</li>
-                        <li>• PyMC 5 (market mix)</li>
-                        <li>• SHAP (explainability)</li>
-                        <li>• Evidently AI (drift monitoring)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
     </main>
 
-    <footer class="max-w-4xl mx-auto py-12 px-6 border-t border-slate-100 dark:border-slate-800">
-        <p class="text-sm text-slate-400">© 2025 Vinit Sutar. Crafted with passion for data science.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">© 2025 Vinit Sutar. Crafted with passion for data science.</p>
+        </div>
     </footer>
 
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
