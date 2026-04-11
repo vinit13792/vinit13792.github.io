@@ -17,3 +17,4 @@ CLAUDE.md
 *.tex
 *.aux
 *.log
+.vercel
