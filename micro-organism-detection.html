@@ -79,7 +79,7 @@
     <!-- Main Content -->
     <main class="section" style="padding-top: 2rem;">
         <div class="container">
-            <div class="article-content glass-card fade-in" style="padding: 3rem;">
+            <div class="article-content glass-card fade-in visible" style="padding: 3rem;">
 
                 <!-- Impact Summary -->
                 <div class="impact-card" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
@@ -166,11 +166,11 @@
 
                 <div class="architecture-diagram">
                     <pre style="background: transparent; border: none; padding: 0;">
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐    ┌──────────────────┐
+┌─────────────────┐     ┌──────────────────┐    ┌─────────────────┐     ┌──────────────────┐
 │  Image          │───▶│  Preprocessing   │───▶│  Detection      │───▶│  Post-Processing │
-│  Acquisition    │    │  Pipeline        │    │  (Mask R-CNN)   │    │  & Reporting     │
-│  (Raspberry Pi) │    │  (OpenCV)        │    │  (PyTorch)      │    │  (FastAPI)       │
-└─────────────────┘    └──────────────────┘    └─────────────────┘    └──────────────────┘
+│  Acquisition    │     │  Pipeline        │    │  (Mask R-CNN)   │     │  & Reporting     │
+│  (Raspberry Pi) │     │  (OpenCV)        │    │  (PyTorch)      │     │  (FastAPI)       │
+└─────────────────┘     └──────────────────┘    └─────────────────┘     └──────────────────┘
         │                      │                       │                       │
         ▼                      ▼                       ▼                       ▼
    12MP JPEG            Normalized             Instance Masks          JSON Reports
@@ -851,21 +851,21 @@ class GrowthRateAnalyzer:
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                              DEPLOYMENT ARCHITECTURE                             │
 ├─────────────────────────────────────────────────────────────────────────────────┤
-│                                                                                  │
-│   LAB LOCATIONS (×5)                    CENTRAL CLOUD (AWS)                      │
-│  ┌─────────────────┐                   ┌──────────────────────────┐            │
-│  │ Raspberry Pi    │                   │ API Gateway              │            │
-│  │ + Camera Module │                   │ (REST API)               │            │
-│  │                 │                   │                          │            │
+│                                                                                 │
+│   LAB LOCATIONS (×5)                    CENTRAL CLOUD (AWS)                     │
+│  ┌─────────────────┐                    ┌──────────────────────────┐            │
+│  │ Raspberry Pi    │                    │ API Gateway              │            │
+│  │ + Camera Module │                    │ (REST API)               │            │
+│  │                 │                    │                          │            │
 │  │ - Image Capture │ ──────────────────▶ S3 (Image Storage)       │            │
-│  │ - Preprocessing │    HTTPS/REST     │                          │            │
-│  │ - Compression   │                   │ SageMaker Endpoint       │            │
-│  │ - Local Cache   │ ◀────────────────── (T4 GPU, Mask R-CNN)     │            │
+│  │ - Preprocessing │    HTTPS/REST      │                          │            │
+│  │ - Compression   │                    │ SageMaker Endpoint       │            │
+│  │ - Local Cache   │ ◀────────────────── (T4 GPU, Mask R-CNN)      │           │
 │  │                 │    JSON Results    │                          │            │
-│  │ - LIMS Client   │                   │ DynamoDB (Results)       │            │
-│  └─────────────────┘                   │ CloudWatch (Monitoring)  │            │
-│                                        └──────────────────────────┘            │
-│                                                                                  │
+│  │ - LIMS Client   │                    │ DynamoDB (Results)       │            │
+│  └─────────────────┘                    │ CloudWatch (Monitoring)  │            │
+│                                         └──────────────────────────┘            │
+│                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
                     </pre>
                 </div>
